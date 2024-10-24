@@ -1,0 +1,165 @@
+{
+    "schema": {
+        "structures": [
+            {
+                "name": "BIKESTAND",
+                "type": "TABLE",
+                "columns": [
+                    {
+                        "type": "INTEGER",
+                        "primaryKey": true,
+                        "identity": true,
+                        "nullable": true,
+                        "name": "BIKESTAND_ID"
+                    },
+                    {
+                        "type": "VARCHAR",
+                        "length": 200,
+                        "nullable": true,
+                        "name": "BIKESTAND_LOCATION"
+                    },
+                    {
+                        "type": "INTEGER",
+                        "nullable": true,
+                        "name": "BIKESTAND_SLOTCOUNT"
+                    },
+                    {
+                        "type": "INTEGER",
+                        "nullable": true,
+                        "name": "BIKESTAND_STANDTYPE"
+                    },
+                    {
+                        "type": "INTEGER",
+                        "nullable": true,
+                        "name": "BIKESTAND_COORDINATE"
+                    }
+                ]
+            },
+            {
+                "name": "STANDTYPE",
+                "type": "TABLE",
+                "columns": [
+                    {
+                        "type": "INTEGER",
+                        "primaryKey": true,
+                        "identity": true,
+                        "nullable": true,
+                        "name": "STANDTYPE_ID"
+                    },
+                    {
+                        "type": "VARCHAR",
+                        "length": 20,
+                        "nullable": true,
+                        "name": "STANDTYPE_NAME"
+                    },
+                    {
+                        "type": "VARCHAR",
+                        "length": 200,
+                        "nullable": true,
+                        "name": "STANDTYPE_DESCRIPTION"
+                    }
+                ]
+            },
+            {
+                "name": "COORDINATE",
+                "type": "TABLE",
+                "columns": [
+                    {
+                        "type": "INTEGER",
+                        "primaryKey": true,
+                        "identity": true,
+                        "nullable": true,
+                        "name": "COORDINATE_ID"
+                    },
+                    {
+                        "type": "DOUBLE",
+                        "nullable": true,
+                        "name": "COORDINATE_LATITUDE"
+                    },
+                    {
+                        "type": "DOUBLE",
+                        "nullable": true,
+                        "name": "COORDINATE_LONGITUDE"
+                    },
+                    {
+                        "type": "VARCHAR",
+                        "length": 200,
+                        "nullable": true,
+                        "name": "COORDINATE_NAME"
+                    }
+                ]
+            },
+            {
+                "name": "STANDSUGGESTION",
+                "type": "TABLE",
+                "columns": [
+                    {
+                        "type": "INTEGER",
+                        "primaryKey": true,
+                        "identity": true,
+                        "nullable": true,
+                        "name": "STANDSUGGESTION_ID"
+                    },
+                    {
+                        "type": "VARCHAR",
+                        "length": 200,
+                        "nullable": true,
+                        "name": "STANDSUGGESTION_LOCATION"
+                    },
+                    {
+                        "type": "INTEGER",
+                        "nullable": true,
+                        "name": "STANDSUGGESTION_SLOTCOUNT"
+                    },
+                    {
+                        "type": "INTEGER",
+                        "nullable": true,
+                        "name": "STANDSUGGESTION_STANDTYPE"
+                    },
+                    {
+                        "type": "INTEGER",
+                        "nullable": true,
+                        "name": "STANDSUGGESTION_COORDINATE"
+                    }
+                ]
+            },
+            {
+                "name": "BikeStand_StandType",
+                "type": "foreignKey",
+                "table": "BIKESTAND",
+                "constraintName": "BikeStand_StandType",
+                "columns": "BIKESTAND_STANDTYPE",
+                "referencedTable": "STANDTYPE",
+                "referencedColumns": "STANDTYPE_ID"
+            },
+            {
+                "name": "BikeStand_Coordinate",
+                "type": "foreignKey",
+                "table": "BIKESTAND",
+                "constraintName": "BikeStand_Coordinate",
+                "columns": "BIKESTAND_COORDINATE",
+                "referencedTable": "COORDINATE",
+                "referencedColumns": "COORDINATE_ID"
+            },
+            {
+                "name": "StandSuggestion_StandType",
+                "type": "foreignKey",
+                "table": "STANDSUGGESTION",
+                "constraintName": "StandSuggestion_StandType",
+                "columns": "STANDSUGGESTION_STANDTYPE",
+                "referencedTable": "STANDTYPE",
+                "referencedColumns": "STANDTYPE_ID"
+            },
+            {
+                "name": "StandSuggestion_Coordinate",
+                "type": "foreignKey",
+                "table": "STANDSUGGESTION",
+                "constraintName": "StandSuggestion_Coordinate",
+                "columns": "STANDSUGGESTION_COORDINATE",
+                "referencedTable": "COORDINATE",
+                "referencedColumns": "COORDINATE_ID"
+            }
+        ]
+    },
+    "datasource": "DefaultDB"
+}

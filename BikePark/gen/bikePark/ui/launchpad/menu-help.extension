@@ -1,0 +1,5 @@
+{
+    "module": "BikePark-backend/gen/bikePark/ui/launchpad/menu-help.js",
+    "extensionPoint": "BikePark-backend-menu",
+    "description": "BikePark-backend - Application Menu"
+}
