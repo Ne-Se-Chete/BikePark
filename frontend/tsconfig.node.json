@@ -4,6 +4,8 @@
     "lib": ["ES2023"],
     "module": "ESNext",
     "skipLibCheck": true,
+    "types": ["node", "react", "react-dom"],
+
 
     /* Bundler mode */
     "moduleResolution": "Bundler",
