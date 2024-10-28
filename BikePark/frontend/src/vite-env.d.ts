@@ -6,7 +6,7 @@ declare global {
     }
   
     // Optionally, declare google as a global variable directly
-    const google: typeof import('@types/google.maps');
+    const google: typeof import('google.maps');
   }
   
   export {};
