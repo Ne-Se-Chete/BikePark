@@ -77,14 +77,16 @@ function myMap() {
 
     document.getElementById("removeMarkerButton").addEventListener("click", () => {
         removeMarker();
-        toggleButtons(false, false);
     });
 
     document.getElementById("submitMarkerButton").addEventListener("click", () => {
         if (marker) {
-            submitMarker(marker.position);
-            removeMarker();
-            toggleButtons(false, false);
+            document.getElementById("spotLatitude").value = marker.position.lat();
+            document.getElementById("spotLongitude").value = marker.position.lng();
+
+            loadStandTypes().then(() => {
+                $('#bikeSpotModal').modal('show');
+            });
         }
     });
 
@@ -100,16 +102,69 @@ function addMarker(location) {
     });
 }
 
-function removeMarker() {
-    if (marker) {
-        marker.setMap(null);
-        marker = null;
+async function loadStandTypes() {
+    try {
+        const response = await fetch("http://localhost:8080/services/ts/BikePark/api/BikeParkService.ts/StandTypesData");
+
+        if (!response.ok) {
+            throw new Error("Failed to fetch stand types");
+        }
+
+        const standTypes = await response.json();
+        const standTypeSelect = document.getElementById("standType");
+
+        standTypes.forEach(type => {
+            const option = document.createElement("option");
+            option.value = type.Id;
+            option.textContent = type.Name;
+            standTypeSelect.appendChild(option);
+        });
+    } catch (error) {
+        console.error("Error loading stand types:", error);
     }
 }
 
-function submitMarker(location) {
-    console.log("Marker submitted with coordinates:", location.lat(), location.lng());
-}
+
+document.getElementById("finalSubmitButton").addEventListener("click", () => {
+    const name = document.getElementById("spotName").value;
+    const slotCount = document.getElementById("slotCount").value;
+    const standType = document.getElementById("standType").value;
+    const latitude = document.getElementById("spotLatitude").value;
+    const longitude = document.getElementById("spotLongitude").value;
+
+    const data = {
+        Location: name,
+        SlotCount: parseInt(slotCount, 10),
+        StandType: standType,
+        Latitude: parseFloat(latitude),
+        Longitude: parseFloat(longitude),
+    };
+
+    console.log("Data: ", data);
+
+    fetch("http://localhost:8080/services/ts/BikePark/api/BikeParkService.ts/BikeStandSuggestion", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json",
+        },
+        body: JSON.stringify(data),
+    })
+        .then(response => {
+            if (!response.ok) {
+                throw new Error("Failed to submit bike spot suggestion");
+            }
+            return response.json();
+        })
+        .then(data => {
+            console.log("Bike spot suggestion submitted successfully:", data);
+            $('#bikeSpotModal').modal('hide');
+            removeMarker();
+        })
+        .catch(error => {
+            console.error("Error submitting bike park suggestion:", error);
+        });
+});
+
 
 function toggleButtons(submitEnabled, removeEnabled) {
     document.getElementById("submitMarkerButton").disabled = !submitEnabled;
@@ -146,6 +201,25 @@ function displayBikeParkSuggestions(suggestions) {
     });
 }
 
+$('#bikeSpotModal').on('hidden.bs.modal', function () {
+    document.getElementById("bikeSpotForm").reset();
+    document.getElementById("standType").innerHTML = "";
+
+    const defaultOption = document.createElement("option");
+    defaultOption.value = "";
+    defaultOption.textContent = "Select Stand Type";
+    document.getElementById("standType").appendChild(defaultOption);
+});
+
+function removeMarker() {
+    if (marker) {
+        marker.setMap(null);
+        marker = null;
+
+        toggleButtons(false, false);
+    }
+}
+
 function clearBikeSpotMarkers() {
     bikeSpotMarkers.forEach(marker => marker.setMap(null));
     bikeSpotMarkers = [];
@@ -159,4 +233,5 @@ function clearBikeSuggestionMarkers() {
 function clearAllMarkers() {
     clearBikeSpotMarkers();
     clearBikeSuggestionMarkers();
+    removeMarker()
 }

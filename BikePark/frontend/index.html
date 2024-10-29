@@ -64,6 +64,51 @@
         <div id="googleMap" class="mx-auto"></div>
       </section>
 
+      <!-- Modal for Submitting Bike Spot -->
+      <div class="modal fade" id="bikeSpotModal" tabindex="-1" role="dialog" aria-labelledby="bikeSpotModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="bikeSpotModalLabel">Submit Bike Spot</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+              <form id="bikeSpotForm">
+                <div class="form-group">
+                  <label for="spotName">Name</label>
+                  <input type="text" class="form-control" id="spotName" required>
+                </div>
+                <div class="form-group">
+                  <label for="standType">Stand Type</label>
+                  <select class="form-control" id="standType" required>
+                    <option value="">Select Stand Type</option>
+                  </select>
+                </div>
+                <div class="form-group">
+                  <label for="spotLatitude">Latitude</label>
+                  <input type="text" class="form-control" id="spotLatitude" readonly>
+                </div>
+                <div class="form-group">
+                  <label for="spotLongitude">Longitude</label>
+                  <input type="text" class="form-control" id="spotLongitude" readonly>
+                </div>
+                <div class="form-group">
+                  <label for="slotCount">Slot Count</label>
+                  <input type="number" class="form-control" id="slotCount" required>
+                </div>
+              </form>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+              <button type="button" class="btn btn-primary" id="finalSubmitButton">Submit</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
       <!-- About Us Section -->
       <section id="aboutUsSection" class="mb-5">
         <h2 class="text-center mb-4">About Us</h2>

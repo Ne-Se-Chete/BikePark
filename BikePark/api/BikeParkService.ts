@@ -200,7 +200,7 @@ class BikeParkService {
 
         catch (error) {
             response.setStatus(response.BAD_REQUEST);
-            return "An error occurred posting new suggestion!";
+            return "An error occurred posting new suggestion:" + error;
         }
     }
 
