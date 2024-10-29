@@ -23,22 +23,22 @@ class BikeParkService {
     }
 
     @Get("/BikeStandData")
-    public async BikeStandData() {
-        let allBikeStands = await this.bikeStandDao.findAll();
+    public BikeStandData() {
+        let allBikeStands = this.bikeStandDao.findAll();
 
-        let coordinates = await this.coordinateDao.findAll();
-        let standTypes = await this.standTypeDao.findAll();
+        let coordinates = this.coordinateDao.findAll();
+        let standTypes = this.standTypeDao.findAll();
 
         let coordinateMap = new Map(coordinates.map(c => [c.Id, { latitude: c.Latitude, longitude: c.Longitude }]));
         let standTypeMap = new Map(standTypes.map(st => [st.Id, st.Name]));
 
         let fullBikeStands = allBikeStands.map(bikeStand => {
-
             return {
-                ...bikeStand,
-                latitude: coordinateMap.get(bikeStand.Coordinate || 0)?.latitude,
-                longitude: coordinateMap.get(bikeStand.Coordinate || 0)?.longitude,
-                standTypeName: standTypeMap.get(bikeStand.StandType || 0)
+                LocationName: bikeStand.Location,
+                SlotCount: bikeStand.SlotCount,
+                Latitude: coordinateMap.get(bikeStand.Coordinate || 0)?.latitude,
+                Longitude: coordinateMap.get(bikeStand.Coordinate || 0)?.longitude,
+                StandTypeName: standTypeMap.get(bikeStand.StandType || 0)
             };
         });
 
@@ -46,11 +46,11 @@ class BikeParkService {
     }
 
     @Get("/BikeStandSuggestionData")
-    public async BikeStandSuggestionData() {
-        let allBikeStandSuggestions = await this.bikeStandSuggestionDao.findAll();
+    public BikeStandSuggestionData() {
+        let allBikeStandSuggestions = this.bikeStandSuggestionDao.findAll();
 
-        let coordinates = await this.coordinateDao.findAll();
-        let standTypes = await this.standTypeDao.findAll();
+        let coordinates = this.coordinateDao.findAll();
+        let standTypes = this.standTypeDao.findAll();
 
         let coordinateMap = new Map(coordinates.map(c => [c.Id, { latitude: c.Latitude, longitude: c.Longitude }]));
         let standTypeMap = new Map(standTypes.map(st => [st.Id, st.Name]));
@@ -59,8 +59,8 @@ class BikeParkService {
 
             return {
                 ...bikeStandSuggestion,
-                latitude: coordinateMap.get(bikeStandSuggestion.Coordinate || 0)?.latitude,
-                longitude: coordinateMap.get(bikeStandSuggestion.Coordinate || 0)?.longitude,
+                Latitude: coordinateMap.get(bikeStandSuggestion.Coordinate || 0)?.latitude,
+                Longitude: coordinateMap.get(bikeStandSuggestion.Coordinate || 0)?.longitude,
                 standTypeName: standTypeMap.get(bikeStandSuggestion.StandType || 0)
             };
         });
@@ -106,6 +106,7 @@ class BikeParkService {
                 .filter(bikeStand => bikeStand !== null) as any[];
 
             bikeStandsWithDistance.sort((a, b) => a.distance - b.distance);
+
             return bikeStandsWithDistance.slice(0, body.Limit);
         }
         catch (error) {
@@ -135,7 +136,7 @@ class BikeParkService {
     }
 
     @Post("/BikeStandSuggestion")
-    public async createBikeStandSuggestion(body: any) {
+    public createBikeStandSuggestion(body: any) {
         try {
             ["Location", "SlotCount", "StandTypeId", "Latitude", "Longitude"].forEach(elem => {
                 if (!body.hasOwnProperty(elem)) {
@@ -144,18 +145,18 @@ class BikeParkService {
                 }
             })
 
-            let standType = await this.standTypeDao.findById(body.StandTypeId);
+            let standType = this.standTypeDao.findById(body.StandTypeId);
 
             if (!standType) {
                 response.setStatus(response.BAD_REQUEST);
                 return "Incorrect stand type!";
             }
 
-            let coordinates = await this.coordinateDao.findAll();
+            let coordinates = this.coordinateDao.findAll();
             let coordinateMap = new Map(coordinates.map(c => [c.Id, { latitude: c.Latitude, longitude: c.Longitude }]));
 
-            let allBikeStands = await this.bikeStandDao.findAll();
-            let allBikeStandSuggestions = await this.bikeStandSuggestionDao.findAll();
+            let allBikeStands = this.bikeStandDao.findAll();
+            let allBikeStandSuggestions = this.bikeStandSuggestionDao.findAll();
 
             let existingStand = allBikeStands.some(bikeStand => {
                 let coord = coordinateMap.get(bikeStand.Coordinate || 0);
@@ -180,14 +181,14 @@ class BikeParkService {
             }
 
             else {
-                coordinateId = await this.coordinateDao.create({
+                coordinateId = this.coordinateDao.create({
                     Latitude: body.Latitude,
                     Longitude: body.Longitude,
                     Name: body.Location
                 });
             }
 
-            let newSuggestion = await this.bikeStandSuggestionDao.create({
+            let newSuggestion = this.bikeStandSuggestionDao.create({
                 Location: body.Location,
                 SlotCount: body.SlotCount,
                 StandType: body.StandTypeId,

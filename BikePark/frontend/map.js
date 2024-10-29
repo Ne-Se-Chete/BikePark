@@ -1,4 +1,4 @@
-let map, marker;
+let map, marker, bikeSpotMarkers = [], bikeSpotSuggestionsMarkers = [];
 
 async function loadGoogleMapsScript() {
     try {
@@ -17,9 +17,7 @@ async function loadGoogleMapsScript() {
         script.defer = true;
 
         document.head.appendChild(script);
-    }
-
-    catch (error) {
+    } catch (error) {
         console.error("Error loading Google Maps API key:", error);
     }
 }
@@ -34,7 +32,8 @@ async function getBikeParkSpots() {
             throw new Error("Failed to fetch bike stands");
         }
 
-        let bikeStands = await response.text();
+        const bikeStands = await response.json();
+        displayBikeParkSpots(bikeStands);
     }
 
     catch (error) {
@@ -42,8 +41,25 @@ async function getBikeParkSpots() {
     }
 }
 
+async function getBikeParkSuggestions() {
+    try {
+        const response = await fetch("http://localhost:8080/services/ts/BikePark/api/BikeParkService.ts/BikeStandSuggestionData");
+
+        if (!response.ok) {
+            throw new Error("Failed to fetch bike stands");
+        }
+
+        const bikeStandSuggestions = await response.json();
+        displayBikeParkSuggestions(bikeStandSuggestions);
+    }
+
+    catch (error) {
+        console.error("Error fetching bike park suggestions:", error);
+    }
+}
+
 function myMap() {
-    const sofiaCoords = { lat: 42.6977, lng: 23.3219 }; //Sofia, Bulgaria
+    const sofiaCoords = { lat: 42.6977, lng: 23.3219 }; // Sofia, Bulgaria
     const mapProp = {
         center: sofiaCoords,
         zoom: 13,
@@ -71,6 +87,10 @@ function myMap() {
             toggleButtons(false, false);
         }
     });
+
+    document.getElementById("Bike Spots").addEventListener("click", getBikeParkSpots);
+    document.getElementById("Suggestions").addEventListener("click", getBikeParkSuggestions);
+    document.getElementById("Home").addEventListener("click", clearAllMarkers);
 }
 
 function addMarker(location) {
@@ -94,4 +114,49 @@ function submitMarker(location) {
 function toggleButtons(submitEnabled, removeEnabled) {
     document.getElementById("submitMarkerButton").disabled = !submitEnabled;
     document.getElementById("removeMarkerButton").disabled = !removeEnabled;
+}
+
+function displayBikeParkSpots(bikeStands) {
+    clearAllMarkers();
+
+    bikeStands.forEach(stand => {
+        const { Latitude, Longitude } = stand;
+        const position = { lat: Latitude, lng: Longitude };
+        const bikeSpotMarker = new google.maps.Marker({
+            position,
+            map: map,
+        });
+
+        bikeSpotMarkers.push(bikeSpotMarker);
+    });
+}
+
+function displayBikeParkSuggestions(suggestions) {
+    clearAllMarkers();
+
+    suggestions.forEach(stand => {
+        const { Latitude, Longitude } = stand;
+        const position = { lat: Latitude, lng: Longitude };
+        const bikeSpotSuggestionMarker = new google.maps.Marker({
+            position,
+            map: map,
+        });
+
+        bikeSpotSuggestionsMarkers.push(bikeSpotSuggestionMarker);
+    });
+}
+
+function clearBikeSpotMarkers() {
+    bikeSpotMarkers.forEach(marker => marker.setMap(null));
+    bikeSpotMarkers = [];
+}
+
+function clearBikeSuggestionMarkers() {
+    bikeSpotSuggestionsMarkers.forEach(marker => marker.setMap(null));
+    bikeSpotSuggestionsMarkers = [];
+}
+
+function clearAllMarkers() {
+    clearBikeSpotMarkers();
+    clearBikeSuggestionMarkers();
 }
