@@ -24,10 +24,10 @@
     </head>
 
     <body>
-        <ide-header menu-ext-id="BikePark-backend-menu"></ide-header>
+        <ide-header menu-ext-id="BikePark-menu"></ide-header>
 
         <ide-container>
-            <view id="BikePark-backend-home-launchpad"></view>
+            <view id="BikePark-home-launchpad"></view>
         </ide-container>
 
         <ide-dialogs></ide-dialogs>
@@ -36,9 +36,9 @@
         <script type="text/javascript">
             angular.module('app', ['ngResource', 'ideLayout', 'ideUI'])
                 .constant('branding', {
-                    name: 'Bike Park',
+                    name: 'Bike Park Server',
                     brand: 'Ne Se Chete',
-                    brandUrl: 'https://github.com/Ne-Se-Chete/BikePark',
+                    brandUrl: 'https://nesechete.com',
                     icons: {
                         faviconIco: '/services/web/ide-branding/images/favicon.ico',
                         favicon32: '/services/web/ide-branding/images/favicon-32x32.png',
@@ -47,12 +47,12 @@
                     logo: '/services/web/ide-branding/images/logo.svg',
                 })
                 .constant('extensionPoint', {
-                    perspectives: "BikePark-backend",
-                    views: "BikePark-backend-view",
-                    dialogWindows: "BikePark-backend-dialog-window"
+                    perspectives: "BikePark",
+                    views: "BikePark-view",
+                    dialogWindows: "BikePark-dialog-window"
                 })
                 .config(["messageHubProvider", function (messageHubProvider) {
-                    messageHubProvider.eventIdPrefix = 'BikePark-backend.launchpad.Home';
+                    messageHubProvider.eventIdPrefix = 'BikePark.launchpad.Home';
                 }])
                 .controller('ApplicationController', ["$scope", "messageHub", function ($scope, messageHub) {
 

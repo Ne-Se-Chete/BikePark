@@ -2,6 +2,7 @@ import { BikeStandRepository as BikeStandDao } from "BikePark/gen/bikePark/dao/B
 import { StandSuggestionRepository as BikeStandSuggestionDao } from "BikePark/gen/bikePark/dao/BikeStandSuggestion/StandSuggestionRepository";
 import { CoordinateRepository as CoordinateDao } from "BikePark/gen/bikePark/dao/Settings/CoordinateRepository";
 import { StandTypeRepository as StandTypeDao } from "BikePark/gen/bikePark/dao/Settings/StandTypeRepository";
+import { ApiKeyRepository as ApiKeyDao } from "BikePark/gen/bikePark/dao/Settings/ApiKeyRepository"
 
 import { Controller, Get, Post, response } from "sdk/http";
 
@@ -11,12 +12,14 @@ class BikeParkService {
     private readonly bikeStandSuggestionDao;
     private readonly coordinateDao;
     private readonly standTypeDao;
+    private readonly apiKeyDao;
 
     constructor() {
         this.bikeStandDao = new BikeStandDao();
         this.bikeStandSuggestionDao = new BikeStandSuggestionDao();
         this.coordinateDao = new CoordinateDao();
         this.standTypeDao = new StandTypeDao();
+        this.apiKeyDao = new ApiKeyDao();
     }
 
     @Get("/BikeStandData")
@@ -116,6 +119,19 @@ class BikeParkService {
         let allStandTypes = this.standTypeDao.findAll();
 
         return allStandTypes;
+    }
+
+    @Get("/ApiKey/:ApiKeyId")
+    public ApiKey(ctx: any) {
+        const apiKeyId = ctx.pathParameters.ApiKeyId;
+        const apiKey = this.apiKeyDao.findById(apiKeyId);
+
+        if (!apiKey) {
+            response.setStatus(response.BAD_REQUEST);
+            return "There isn't an API KEY with this Id!";
+        }
+
+        return apiKey.Key;
     }
 
     @Post("/BikeStandSuggestion")

@@ -4,7 +4,7 @@ import { CoordinateRepository, CoordinateEntityOptions } from "../../dao/Setting
 import { ValidationError } from "../utils/ValidationError";
 import { HttpUtils } from "../utils/HttpUtils";
 
-const validationModules = await Extensions.loadExtensionModules("BikePark-backend-Settings-Coordinate", ["validate"]);
+const validationModules = await Extensions.loadExtensionModules("BikePark-Settings-Coordinate", ["validate"]);
 
 @Controller
 class CoordinateService {
@@ -30,7 +30,7 @@ class CoordinateService {
         try {
             this.validateEntity(entity);
             entity.Id = this.repository.create(entity);
-            response.setHeader("Content-Location", "/services/ts/BikePark-backend/gen/bikePark/api/Settings/CoordinateService.ts/" + entity.Id);
+            response.setHeader("Content-Location", "/services/ts/BikePark/gen/bikePark/api/Settings/CoordinateService.ts/" + entity.Id);
             response.setStatus(response.CREATED);
             return entity;
         } catch (error: any) {

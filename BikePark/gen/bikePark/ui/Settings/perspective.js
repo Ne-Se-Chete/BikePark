@@ -6,7 +6,7 @@
 const perspectiveData = {
 	id: 'Settings',
 	name: 'Settings',
-	link: '/services/web/BikePark-backend/gen/bikePark/ui/Settings/index.html',
+	link: '/services/web/BikePark/gen/bikePark/ui/Settings/index.html',
 	order: 1000,
 	icon: '/services/web/resources/unicons/wrench.svg',
 };

@@ -1,4 +1,4 @@
 {
-    "name": "BikePark-backend-dialog-window",
-    "description": "BikePark-backend - Extension Point for the Application Dialog Window Providers"
+    "name": "BikePark-dialog-window",
+    "description": "BikePark - Extension Point for the Application Dialog Window Providers"
 }

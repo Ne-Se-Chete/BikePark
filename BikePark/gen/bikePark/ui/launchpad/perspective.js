@@ -6,7 +6,7 @@
 const perspectiveData = {
 	id: 'home',
 	name: 'Home',
-	link: '/services/web/BikePark-backend/gen/bikePark/index.html',
+	link: '/services/web/BikePark/gen/bikePark/index.html',
 	icon: '/services/web/resources/unicons/estate.svg',
 	order: 1,
 };

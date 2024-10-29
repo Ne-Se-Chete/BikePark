@@ -1,9 +1,9 @@
 angular.module('page', ["ideUI", "ideView", "entityApi"])
 	.config(["messageHubProvider", function (messageHubProvider) {
-		messageHubProvider.eventIdPrefix = 'BikePark-backend.BikeStandSuggestion.StandSuggestion';
+		messageHubProvider.eventIdPrefix = 'BikePark.BikeStandSuggestion.StandSuggestion';
 	}])
 	.config(["entityApiProvider", function (entityApiProvider) {
-		entityApiProvider.baseUrl = "/services/ts/BikePark-backend/gen/bikePark/api/BikeStandSuggestion/StandSuggestionService.ts";
+		entityApiProvider.baseUrl = "/services/ts/BikePark/gen/bikePark/api/BikeStandSuggestion/StandSuggestionService.ts";
 	}])
 	.controller('PageController', ['$scope', '$http', 'messageHub', 'entityApi', 'Extensions', function ($scope, $http, messageHub, entityApi, Extensions) {
 
@@ -14,7 +14,7 @@ angular.module('page', ["ideUI", "ideView", "entityApi"])
 		$scope.action = "select";
 
 		//-----------------Custom Actions-------------------//
-		Extensions.get('dialogWindow', 'BikePark-backend-custom-action').then(function (response) {
+		Extensions.get('dialogWindow', 'BikePark-custom-action').then(function (response) {
 			$scope.pageActions = response.filter(e => e.perspective === "BikeStandSuggestion" && e.view === "StandSuggestion" && (e.type === "page" || e.type === undefined));
 		});
 
@@ -175,7 +175,7 @@ angular.module('page', ["ideUI", "ideView", "entityApi"])
 		$scope.optionsCoordinate = [];
 
 
-		$http.get("/services/ts/BikePark-backend/gen/bikePark/api/Settings/CoordinateService.ts").then(function (response) {
+		$http.get("/services/ts/BikePark/gen/bikePark/api/Settings/CoordinateService.ts").then(function (response) {
 			$scope.optionsCoordinate = response.data.map(e => {
 				return {
 					value: e.Id,

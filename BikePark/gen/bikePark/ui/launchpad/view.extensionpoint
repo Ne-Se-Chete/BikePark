@@ -1,4 +1,4 @@
 {
-    "name": "BikePark-backend-view",
-    "description": "BikePark-backend - Extension Point for the Application View Providers"
+    "name": "BikePark-view",
+    "description": "BikePark - Extension Point for the Application View Providers"
 }

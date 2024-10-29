@@ -224,7 +224,7 @@ export class StandSuggestionRepository {
     }
 
     private async triggerEvent(data: StandSuggestionEntityEvent | StandSuggestionUpdateEntityEvent) {
-        const triggerExtensions = await extensions.loadExtensionModules("BikePark-backend-BikeStandSuggestion-StandSuggestion", ["trigger"]);
+        const triggerExtensions = await extensions.loadExtensionModules("BikePark-BikeStandSuggestion-StandSuggestion", ["trigger"]);
         triggerExtensions.forEach(triggerExtension => {
             try {
                 triggerExtension.trigger(data);
@@ -232,6 +232,6 @@ export class StandSuggestionRepository {
                 console.error(error);
             }            
         });
-        producer.topic("BikePark-backend-BikeStandSuggestion-StandSuggestion").send(JSON.stringify(data));
+        producer.topic("BikePark-BikeStandSuggestion-StandSuggestion").send(JSON.stringify(data));
     }
 }

@@ -1,1 +1,1 @@
-{"module":"BikePark-backend/gen/bikePark/ui/BikeStandSuggestion/StandSuggestion/main-details/view.js","extensionPoint":"BikePark-backend-view","description":"BikePark-backend - Application View - Main Details"}
+{"module":"BikePark/gen/bikePark/ui/BikeStandSuggestion/StandSuggestion/main-details/view.js","extensionPoint":"BikePark-view","description":"BikePark - Application View - Main Details"}

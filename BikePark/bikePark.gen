@@ -1,16 +1,16 @@
 {
   "brand": "Ne Se Chete",
-  "brandUrl": "https://github.com/Ne-Se-Chete/BikePark",
-  "title": "Bike Park",
-  "description": "Bike Stand Finding Application",
-  "projectName": "BikePark-backend",
-  "workspaceName": "workspace",
-  "filePath": "bikePark.model",
-  "templateId": "template-application-angular/template/template.js",
+  "brandUrl": "https://nesechete.com",
+  "title": "Bike Park Server",
+  "description": "Bike Parking Spots Management Server",
   "fileName": "bikePark",
   "genFolderName": "bikePark",
   "dataSource": "DefaultDB",
   "tablePrefix": "",
+  "projectName": "BikePark",
+  "workspaceName": "workspace",
+  "filePath": "bikePark.model",
+  "templateId": "template-application-angular/template/template.js",
   "perspectives": {
     "BikeStand": {
       "views": [
@@ -44,7 +44,8 @@
     "Settings": {
       "views": [
         "StandType",
-        "Coordinate"
+        "Coordinate",
+        "ApiKey"
       ],
       "name": "Settings",
       "label": "Settings",
@@ -665,7 +666,7 @@
           "isRequiredProperty": false,
           "isCalculatedProperty": false,
           "widgetLabel": "Coordinate",
-          "widgetDropdownUrl": "/services/ts/BikePark-backend/gen/bikePark/api/Settings/CoordinateService.ts",
+          "widgetDropdownUrl": "/services/ts/BikePark/gen/bikePark/api/Settings/CoordinateService.ts",
           "dataTypeJava": "int",
           "dataTypeTypescript": "number",
           "inputRule": ""
@@ -793,7 +794,7 @@
             "isRequiredProperty": false,
             "isCalculatedProperty": false,
             "widgetLabel": "Coordinate",
-            "widgetDropdownUrl": "/services/ts/BikePark-backend/gen/bikePark/api/Settings/CoordinateService.ts",
+            "widgetDropdownUrl": "/services/ts/BikePark/gen/bikePark/api/Settings/CoordinateService.ts",
             "dataTypeJava": "int",
             "dataTypeTypescript": "number",
             "inputRule": ""
@@ -801,6 +802,83 @@
         ]
       },
       "hasDropdowns": true
+    },
+    {
+      "properties": [
+        {
+          "dataAutoIncrement": true,
+          "dataName": "APIKEY_ID",
+          "dataNullable": true,
+          "dataPrimaryKey": true,
+          "dataType": "INTEGER",
+          "name": "Id",
+          "widgetIsMajor": true,
+          "widgetLength": "20",
+          "widgetSize": "",
+          "widgetType": "TEXTBOX",
+          "dataNotNull": false,
+          "dataUnique": false,
+          "isRequiredProperty": false,
+          "isCalculatedProperty": false,
+          "widgetLabel": "Id",
+          "widgetDropdownUrl": "",
+          "dataTypeJava": "int",
+          "dataTypeTypescript": "number",
+          "inputRule": ""
+        },
+        {
+          "dataLength": "200",
+          "dataName": "APIKEY_KEY",
+          "dataNullable": true,
+          "dataType": "VARCHAR",
+          "name": "Key",
+          "widgetIsMajor": true,
+          "widgetLength": "200",
+          "widgetSize": "",
+          "widgetType": "TEXTBOX",
+          "dataNotNull": false,
+          "dataAutoIncrement": false,
+          "dataPrimaryKey": false,
+          "dataUnique": false,
+          "isRequiredProperty": false,
+          "isCalculatedProperty": false,
+          "widgetLabel": "Key",
+          "widgetDropdownUrl": "",
+          "dataTypeJava": "string",
+          "dataTypeTypescript": "string",
+          "minLength": 0,
+          "maxLength": 200,
+          "inputRule": ""
+        }
+      ],
+      "caption": "Manage entity ApiKey",
+      "dataCount": "SELECT COUNT(*) AS COUNT FROM \"APIKEY\"",
+      "dataName": "APIKEY",
+      "dataQuery": "",
+      "feedPassword": "YWRtaW4=",
+      "feedUsername": "YWRtaW4=",
+      "generateReport": "false",
+      "icon": "/services/web/resources/unicons/file.svg",
+      "layoutType": "MANAGE",
+      "menuIndex": "100",
+      "menuKey": "apikey",
+      "menuLabel": "ApiKey",
+      "name": "ApiKey",
+      "navigationPath": "/Home",
+      "perspectiveIcon": "/services/web/resources/unicons/wrench.svg",
+      "perspectiveLabel": "Settings",
+      "perspectiveName": "Settings",
+      "perspectiveOrder": "1000",
+      "perspectiveRole": "",
+      "title": "ApiKey",
+      "tooltip": "ApiKey",
+      "type": "SETTING",
+      "dataSource": "DefaultDB",
+      "referencedProjections": [],
+      "primaryKeys": [
+        "Id"
+      ],
+      "primaryKeysString": "Id"
     }
   ]
 }

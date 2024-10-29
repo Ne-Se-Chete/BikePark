@@ -4,7 +4,7 @@ import { BikeStandRepository, BikeStandEntityOptions } from "../../dao/BikeStand
 import { ValidationError } from "../utils/ValidationError";
 import { HttpUtils } from "../utils/HttpUtils";
 
-const validationModules = await Extensions.loadExtensionModules("BikePark-backend-BikeStand-BikeStand", ["validate"]);
+const validationModules = await Extensions.loadExtensionModules("BikePark-BikeStand-BikeStand", ["validate"]);
 
 @Controller
 class BikeStandService {
@@ -30,7 +30,7 @@ class BikeStandService {
         try {
             this.validateEntity(entity);
             entity.Id = this.repository.create(entity);
-            response.setHeader("Content-Location", "/services/ts/BikePark-backend/gen/bikePark/api/BikeStand/BikeStandService.ts/" + entity.Id);
+            response.setHeader("Content-Location", "/services/ts/BikePark/gen/bikePark/api/BikeStand/BikeStandService.ts/" + entity.Id);
             response.setStatus(response.CREATED);
             return entity;
         } catch (error: any) {

@@ -6,7 +6,7 @@
 const perspectiveData = {
 	id: 'BikeStandSuggestion',
 	name: 'Bike Stand Suggestion',
-	link: '/services/web/BikePark-backend/gen/bikePark/ui/BikeStandSuggestion/index.html',
+	link: '/services/web/BikePark/gen/bikePark/ui/BikeStandSuggestion/index.html',
 	order: 200,
 	icon: '/services/web/resources/unicons/parking-square.svg',
 };

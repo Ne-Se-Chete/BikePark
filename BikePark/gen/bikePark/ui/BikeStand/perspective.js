@@ -6,7 +6,7 @@
 const perspectiveData = {
 	id: 'BikeStand',
 	name: 'Bike Stand',
-	link: '/services/web/BikePark-backend/gen/bikePark/ui/BikeStand/index.html',
+	link: '/services/web/BikePark/gen/bikePark/ui/BikeStand/index.html',
 	order: 100,
 	icon: '/services/web/resources/unicons/parking-circle.svg',
 };

@@ -8,7 +8,7 @@ const viewData = {
     label: "StandSuggestion",
     factory: "frame",
     region: "left",
-    link: "/services/web/BikePark-backend/gen/bikePark/ui/BikeStandSuggestion/StandSuggestion/index.html",
+    link: "/services/web/BikePark/gen/bikePark/ui/BikeStandSuggestion/StandSuggestion/index.html",
     perspectiveName: "BikeStandSuggestion",
 };
 

@@ -6,7 +6,7 @@
 const viewData = {
     id: "StandType-details",
     label: "StandType",
-    link: "/services/web/BikePark-backend/gen/bikePark/ui/Settings/StandType/dialog-window/index.html",
+    link: "/services/web/BikePark/gen/bikePark/ui/Settings/StandType/dialog-window/index.html",
     perspectiveName: "Settings",
 };
 

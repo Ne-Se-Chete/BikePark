@@ -224,7 +224,7 @@ export class BikeStandRepository {
     }
 
     private async triggerEvent(data: BikeStandEntityEvent | BikeStandUpdateEntityEvent) {
-        const triggerExtensions = await extensions.loadExtensionModules("BikePark-backend-BikeStand-BikeStand", ["trigger"]);
+        const triggerExtensions = await extensions.loadExtensionModules("BikePark-BikeStand-BikeStand", ["trigger"]);
         triggerExtensions.forEach(triggerExtension => {
             try {
                 triggerExtension.trigger(data);
@@ -232,6 +232,6 @@ export class BikeStandRepository {
                 console.error(error);
             }            
         });
-        producer.topic("BikePark-backend-BikeStand-BikeStand").send(JSON.stringify(data));
+        producer.topic("BikePark-BikeStand-BikeStand").send(JSON.stringify(data));
     }
 }

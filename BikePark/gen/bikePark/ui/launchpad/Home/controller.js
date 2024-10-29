@@ -5,13 +5,13 @@
  */
 angular.module('page', ['ideUI', 'ideView', 'entityApi'])
 	.config(['messageHubProvider', function (messageHubProvider) {
-		messageHubProvider.eventIdPrefix = 'BikePark-backend.launchpad.Home';
+		messageHubProvider.eventIdPrefix = 'BikePark.launchpad.Home';
 	}])
 	.config(['entityApiProvider', function (entityApiProvider) {
-		entityApiProvider.baseUrl = '/services/js/BikePark-backend/gen/bikePark/ui/launchpad/Home/tiles.js';
+		entityApiProvider.baseUrl = '/services/js/BikePark/gen/bikePark/ui/launchpad/Home/tiles.js';
 	}])
 	.controller('PageController', ['$scope', 'messageHub', 'entityApi', '$document', function ($scope, messageHub, entityApi, $document) {
-		const favoritesStoreId = 'DIRIGIBLE.BikePark-backend.favorites';
+		const favoritesStoreId = 'DIRIGIBLE.BikePark.favorites';
 		$scope.state = {
 			isBusy: true,
 			error: false,

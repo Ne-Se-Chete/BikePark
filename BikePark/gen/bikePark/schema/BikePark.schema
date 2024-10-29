@@ -124,6 +124,25 @@
                 ]
             },
             {
+                "name": "APIKEY",
+                "type": "TABLE",
+                "columns": [
+                    {
+                        "type": "INTEGER",
+                        "primaryKey": true,
+                        "identity": true,
+                        "nullable": true,
+                        "name": "APIKEY_ID"
+                    },
+                    {
+                        "type": "VARCHAR",
+                        "length": 200,
+                        "nullable": true,
+                        "name": "APIKEY_KEY"
+                    }
+                ]
+            },
+            {
                 "name": "BikeStand_StandType",
                 "type": "foreignKey",
                 "table": "BIKESTAND",

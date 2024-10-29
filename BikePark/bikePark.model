@@ -305,6 +305,55 @@
                 "title": "StandSuggestion",
                 "tooltip": "StandSuggestion",
                 "type": "PRIMARY"
+            },
+            {
+                "properties": [
+                    {
+                        "dataAutoIncrement": "true",
+                        "dataName": "APIKEY_ID",
+                        "dataNullable": "true",
+                        "dataPrimaryKey": "true",
+                        "dataType": "INTEGER",
+                        "name": "Id",
+                        "widgetIsMajor": "true",
+                        "widgetLength": "20",
+                        "widgetSize": "",
+                        "widgetType": "TEXTBOX"
+                    },
+                    {
+                        "dataLength": "200",
+                        "dataName": "APIKEY_KEY",
+                        "dataNullable": "true",
+                        "dataType": "VARCHAR",
+                        "name": "Key",
+                        "widgetIsMajor": "true",
+                        "widgetLength": "200",
+                        "widgetSize": "",
+                        "widgetType": "TEXTBOX"
+                    }
+                ],
+                "caption": "Manage entity ApiKey",
+                "dataCount": "SELECT COUNT(*) AS COUNT FROM \"${tablePrefix}APIKEY\"",
+                "dataName": "APIKEY",
+                "dataQuery": "",
+                "feedPassword": "YWRtaW4=",
+                "feedUsername": "YWRtaW4=",
+                "generateReport": "false",
+                "icon": "/services/web/resources/unicons/file.svg",
+                "layoutType": "MANAGE",
+                "menuIndex": "100",
+                "menuKey": "apikey",
+                "menuLabel": "ApiKey",
+                "name": "ApiKey",
+                "navigationPath": "/Home",
+                "perspectiveIcon": "/services/web/resources/unicons/wrench.svg",
+                "perspectiveLabel": "Settings",
+                "perspectiveName": "Settings",
+                "perspectiveOrder": "1000",
+                "perspectiveRole": "",
+                "title": "ApiKey",
+                "tooltip": "ApiKey",
+                "type": "SETTING"
             }
         ],
         "perspectives": [
