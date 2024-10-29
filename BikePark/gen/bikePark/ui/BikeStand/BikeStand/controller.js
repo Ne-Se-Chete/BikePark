@@ -5,7 +5,7 @@ angular.module('page', ["ideUI", "ideView", "entityApi"])
 	.config(["entityApiProvider", function (entityApiProvider) {
 		entityApiProvider.baseUrl = "/services/ts/BikePark/gen/bikePark/api/BikeStand/BikeStandService.ts";
 	}])
-	.controller('PageController', ['$scope', 'messageHub', 'entityApi', 'Extensions', function ($scope, messageHub, entityApi, Extensions) {
+	.controller('PageController', ['$scope', '$http', 'messageHub', 'entityApi', 'Extensions', function ($scope, $http, messageHub, entityApi, Extensions) {
 
 		$scope.dataPage = 1;
 		$scope.dataCount = 0;
@@ -112,6 +112,8 @@ angular.module('page', ["ideUI", "ideView", "entityApi"])
 			messageHub.postMessage("entitySelected", {
 				entity: entity,
 				selectedMainEntityId: entity.Id,
+				optionsStandType: $scope.optionsStandType,
+				optionsCoordinate: $scope.optionsCoordinate,
 			});
 		};
 
@@ -119,13 +121,19 @@ angular.module('page', ["ideUI", "ideView", "entityApi"])
 			$scope.selectedEntity = null;
 			$scope.action = "create";
 
-			messageHub.postMessage("createEntity");
+			messageHub.postMessage("createEntity", {
+				entity: {},
+				optionsStandType: $scope.optionsStandType,
+				optionsCoordinate: $scope.optionsCoordinate,
+			});
 		};
 
 		$scope.updateEntity = function () {
 			$scope.action = "update";
 			messageHub.postMessage("updateEntity", {
 				entity: $scope.selectedEntity,
+				optionsStandType: $scope.optionsStandType,
+				optionsCoordinate: $scope.optionsCoordinate,
 			});
 		};
 
@@ -162,7 +170,50 @@ angular.module('page', ["ideUI", "ideView", "entityApi"])
 		$scope.openFilter = function (entity) {
 			messageHub.showDialogWindow("BikeStand-filter", {
 				entity: $scope.filterEntity,
+				optionsStandType: $scope.optionsStandType,
+				optionsCoordinate: $scope.optionsCoordinate,
 			});
 		};
+
+		//----------------Dropdowns-----------------//
+		$scope.optionsStandType = [];
+		$scope.optionsCoordinate = [];
+
+
+		$http.get("/services/ts/BikePark/gen/bikePark/api/Settings/StandTypeService.ts").then(function (response) {
+			$scope.optionsStandType = response.data.map(e => {
+				return {
+					value: e.Id,
+					text: e.Name
+				}
+			});
+		});
+
+		$http.get("/services/ts/BikePark/gen/bikePark/api/Settings/CoordinateService.ts").then(function (response) {
+			$scope.optionsCoordinate = response.data.map(e => {
+				return {
+					value: e.Id,
+					text: e.Name
+				}
+			});
+		});
+
+		$scope.optionsStandTypeValue = function (optionKey) {
+			for (let i = 0; i < $scope.optionsStandType.length; i++) {
+				if ($scope.optionsStandType[i].value === optionKey) {
+					return $scope.optionsStandType[i].text;
+				}
+			}
+			return null;
+		};
+		$scope.optionsCoordinateValue = function (optionKey) {
+			for (let i = 0; i < $scope.optionsCoordinate.length; i++) {
+				if ($scope.optionsCoordinate[i].value === optionKey) {
+					return $scope.optionsCoordinate[i].text;
+				}
+			}
+			return null;
+		};
+		//----------------Dropdowns-----------------//
 
 	}]);

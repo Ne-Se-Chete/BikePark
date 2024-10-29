@@ -40,6 +40,8 @@ angular.module('page', ["ideUI", "ideView", "entityApi"])
 		messageHub.onDidReceiveMessage("clearDetails", function (msg) {
 			$scope.$apply(function () {
 				$scope.entity = {};
+				$scope.optionsStandType = [];
+				$scope.optionsCoordinate = [];
 				$scope.action = 'select';
 			});
 		});
@@ -47,6 +49,8 @@ angular.module('page', ["ideUI", "ideView", "entityApi"])
 		messageHub.onDidReceiveMessage("entitySelected", function (msg) {
 			$scope.$apply(function () {
 				$scope.entity = msg.data.entity;
+				$scope.optionsStandType = msg.data.optionsStandType;
+				$scope.optionsCoordinate = msg.data.optionsCoordinate;
 				$scope.action = 'select';
 			});
 		});
@@ -54,6 +58,8 @@ angular.module('page', ["ideUI", "ideView", "entityApi"])
 		messageHub.onDidReceiveMessage("createEntity", function (msg) {
 			$scope.$apply(function () {
 				$scope.entity = {};
+				$scope.optionsStandType = msg.data.optionsStandType;
+				$scope.optionsCoordinate = msg.data.optionsCoordinate;
 				$scope.action = 'create';
 			});
 		});
@@ -61,6 +67,8 @@ angular.module('page', ["ideUI", "ideView", "entityApi"])
 		messageHub.onDidReceiveMessage("updateEntity", function (msg) {
 			$scope.$apply(function () {
 				$scope.entity = msg.data.entity;
+				$scope.optionsStandType = msg.data.optionsStandType;
+				$scope.optionsCoordinate = msg.data.optionsCoordinate;
 				$scope.action = 'update';
 			});
 		});
