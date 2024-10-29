@@ -54,7 +54,7 @@
                     },
                     {
                         "type": "VARCHAR",
-                        "length": 200,
+                        "length": 2000,
                         "nullable": true,
                         "name": "STANDTYPE_DESCRIPTION"
                     }

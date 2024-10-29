@@ -114,13 +114,13 @@
                         "widgetType": "TEXTBOX"
                     },
                     {
-                        "dataLength": "200",
+                        "dataLength": "2000",
                         "dataName": "STANDTYPE_DESCRIPTION",
                         "dataNullable": "true",
                         "dataType": "VARCHAR",
                         "name": "Description",
                         "widgetIsMajor": "true",
-                        "widgetLength": "200",
+                        "widgetLength": "2000",
                         "widgetSize": "",
                         "widgetType": "TEXTBOX"
                     }

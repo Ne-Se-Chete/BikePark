@@ -122,8 +122,8 @@ class StandTypeService {
         if (entity.Name?.length > 20) {
             throw new ValidationError(`The 'Name' exceeds the maximum length of [20] characters`);
         }
-        if (entity.Description?.length > 200) {
-            throw new ValidationError(`The 'Description' exceeds the maximum length of [200] characters`);
+        if (entity.Description?.length > 2000) {
+            throw new ValidationError(`The 'Description' exceeds the maximum length of [2000] characters`);
         }
         for (const next of validationModules) {
             next.validate(entity);

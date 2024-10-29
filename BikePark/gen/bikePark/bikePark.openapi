@@ -2258,7 +2258,7 @@ components:
         Description:
           type: string
           minLength: 0
-          maxLength: 200
+          maxLength: 2000
     StandTypeFilterOptions:
       type: object
       properties:
@@ -2291,13 +2291,13 @@ components:
                   oneOf:
                     - type: string
                       minLength: 0
-                      maxLength: 200
+                      maxLength: 2000
                     - type: array
                       items:
                         type: string
                         format: double
                         minLength: 0
-                        maxLength: 200
+                        maxLength: 2000
             notEquals:
               type: object
               properties:
@@ -2324,13 +2324,13 @@ components:
                   oneOf:
                     - type: string
                       minLength: 0
-                      maxLength: 200
+                      maxLength: 2000
                     - type: array
                       items:
                         type: string
                         format: double
                         minLength: 0
-                        maxLength: 200
+                        maxLength: 2000
             contains:
               type: object
               properties:
@@ -2342,7 +2342,7 @@ components:
                 Description:
                   type: string
                   minLength: 0
-                  maxLength: 200
+                  maxLength: 2000
             greaterThan:
               type: object
               properties:
@@ -2356,7 +2356,7 @@ components:
                 Description:
                   type: string
                   minLength: 0
-                  maxLength: 200
+                  maxLength: 2000
             greaterThanOrEqual:
               type: object
               properties:
@@ -2370,7 +2370,7 @@ components:
                 Description:
                   type: string
                   minLength: 0
-                  maxLength: 200
+                  maxLength: 2000
             lessThan:
               type: object
               properties:
@@ -2384,7 +2384,7 @@ components:
                 Description:
                   type: string
                   minLength: 0
-                  maxLength: 200
+                  maxLength: 2000
             lessThanOrEqual:
               type: object
               properties:
@@ -2398,7 +2398,7 @@ components:
                 Description:
                   type: string
                   minLength: 0
-                  maxLength: 200
+                  maxLength: 2000
         $select:
           type: array
           example: ["Id", "Name", "Description"]

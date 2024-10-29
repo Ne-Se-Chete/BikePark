@@ -379,13 +379,13 @@
           "inputRule": ""
         },
         {
-          "dataLength": "200",
+          "dataLength": "2000",
           "dataName": "STANDTYPE_DESCRIPTION",
           "dataNullable": true,
           "dataType": "VARCHAR",
           "name": "Description",
           "widgetIsMajor": true,
-          "widgetLength": "200",
+          "widgetLength": "2000",
           "widgetSize": "",
           "widgetType": "TEXTBOX",
           "dataNotNull": false,
@@ -399,7 +399,7 @@
           "dataTypeJava": "string",
           "dataTypeTypescript": "string",
           "minLength": 0,
-          "maxLength": 200,
+          "maxLength": 2000,
           "inputRule": ""
         }
       ],
