@@ -122,7 +122,7 @@ class BikeParkService {
     }
 
     @Get("/ApiKey/:ApiKeyId")
-    public ApiKey(ctx: any) {
+    public ApiKey(_: any, ctx: any) {
         const apiKeyId = ctx.pathParameters.ApiKeyId;
         const apiKey = this.apiKeyDao.findById(apiKeyId);
 

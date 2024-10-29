@@ -1,8 +1,34 @@
-let map, marker; // Global variables for the map and marker
+async function loadGoogleMapsScript() {
+    try {
+        const response = await fetch("http://localhost:8080/services/ts/BikePark/api/BikeParkService.ts/ApiKey/1");
 
-// Initialize and add the map
+        if (!response.ok) {
+            throw new Error("Failed to fetch API key");
+        }
+
+        let apiKey = await response.text();
+        apiKey = apiKey.replace(/^"(.*)"$/, '$1');
+
+        console.log("ApiKey:", apiKey);
+        console.log("Map src: ", `https://maps.googleapis.com/maps/api/js?key=${apiKey}&callback=myMap`);
+
+        const script = document.createElement("script");
+        script.src = `https://maps.googleapis.com/maps/api/js?key=${apiKey}&callback=myMap`;
+        script.async = true;
+        script.defer = true;
+
+        document.head.appendChild(script);
+    } catch (error) {
+        console.error("Error loading Google Maps API key:", error);
+    }
+}
+
+loadGoogleMapsScript();
+
+let map, marker;
+
 function myMap() {
-    const sofiaCoords = { lat: 42.6977, lng: 23.3219 }; // Initial center of the map (Sofia, Bulgaria)
+    const sofiaCoords = { lat: 42.6977, lng: 23.3219 }; //Sofia, Bulgaria
     const mapProp = {
         center: sofiaCoords,
         zoom: 13,
@@ -11,31 +37,27 @@ function myMap() {
 
     map = new google.maps.Map(document.getElementById("googleMap"), mapProp);
 
-    // Map click listener to place a marker at the selected location
     google.maps.event.addListener(map, 'click', function (event) {
-        if (!marker) {  // Place marker only if one doesn't already exist
+        if (!marker) {
             addMarker(event.latLng);
-            toggleButtons(true, true); // Enable submit and remove buttons
+            toggleButtons(true, true);
         }
     });
 
-    // "Remove Marker" button functionality
     document.getElementById("removeMarkerButton").addEventListener("click", () => {
         removeMarker();
-        toggleButtons(false, false); // Disable submit and remove buttons
+        toggleButtons(false, false);
     });
 
-    // "Submit Marker" button functionality
     document.getElementById("submitMarkerButton").addEventListener("click", () => {
         if (marker) {
             submitMarker(marker.position);
             removeMarker();
-            toggleButtons(false, false); // Disable submit and remove buttons after submission
+            toggleButtons(false, false);
         }
     });
 }
 
-// Function to add a marker at a chosen location
 function addMarker(location) {
     marker = new google.maps.Marker({
         position: location,
@@ -43,21 +65,17 @@ function addMarker(location) {
     });
 }
 
-// Function to remove the marker from the map
 function removeMarker() {
     if (marker) {
         marker.setMap(null);
-        marker = null;  // Reset marker variable to null
+        marker = null;
     }
 }
 
-// Function to simulate submitting the marker (e.g., to a database)
 function submitMarker(location) {
     console.log("Marker submitted with coordinates:", location.lat(), location.lng());
-    // Here, you would typically perform an AJAX call to save the marker data to a database
 }
 
-// Function to toggle the submit and remove button states
 function toggleButtons(submitEnabled, removeEnabled) {
     document.getElementById("submitMarkerButton").disabled = !submitEnabled;
     document.getElementById("removeMarkerButton").disabled = !removeEnabled;

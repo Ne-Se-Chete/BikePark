@@ -1,14 +1,12 @@
 <!DOCTYPE html>
 <html lang="en">
+
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Interactive Map with Custom Markers</title>
     <!-- Bootstrap CSS -->
-    <link
-      href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
-      rel="stylesheet"
-    />
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet" />
     <!-- Custom CSS -->
     <link href="styles.css" rel="stylesheet" />
 
@@ -20,15 +18,8 @@
       <a class="navbar-brand" href="#">
         <img src="src/bikeIcon.png" alt="Bike Logo" />
       </a>
-      <button
-        class="navbar-toggler"
-        type="button"
-        data-toggle="collapse"
-        data-target="#navbarNav"
-        aria-controls="navbarNav"
-        aria-expanded="false"
-        aria-label="Toggle navigation"
-      >
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+        aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
       <div class="collapse navbar-collapse" id="navbarNav">
@@ -70,16 +61,6 @@
         <div id="googleMap" class="mx-auto"></div>
       </section>
 
-      <!-- View Markers Section -->
-      <!-- <section id="viewMarkersSection" class="mb-5">
-        <h2 class="text-center mb-4">Current Markers</h2>
-        <div class="list-group">
-          <div id="markerList" class="list-group-item">
-            <p>No markers available. Place a marker on the map to see it here.</p>
-          </div>
-        </div>
-      </section> -->
-
       <!-- About Us Section -->
       <section id="aboutUsSection" class="mb-5">
         <h2 class="text-center mb-4">About Us</h2>
@@ -102,11 +83,7 @@
       <div class="d-flex flex-column align-items-center">
         <div class="d-flex align-items-center justify-content-center mb-3">
           <!-- Team Logo -->
-          <img
-            src="src/nesechetelogo.png"
-            alt="Team Logo"
-            class="footer-logo"
-          />
+          <img src="src/nesechetelogo.png" alt="Team Logo" class="footer-logo" />
           <h2 class="ml-3">Our Team</h2>
         </div>
 
@@ -125,15 +102,10 @@
       </div>
     </footer>
 
-    <!-- Google Maps API -->
-    <script
-      src="https://maps.googleapis.com/maps/api/js?key=API_KEY&callback=myMap"
-      async
-      defer
-    ></script>
     <!-- jQuery, Bootstrap JS, and Custom JS -->
     <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.bundle.min.js"></script>
     <script src="map.js"></script>
   </body>
+
 </html>
