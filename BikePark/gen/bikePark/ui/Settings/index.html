@@ -24,7 +24,7 @@
     </head>
 
     <body dg-embeddable-perspective>
-        <ide-header menu-ext-id="BikePark-backend-menu"></ide-header>
+        <ide-header menu-ext-id="BikePark-menu"></ide-header>
         <ide-container ng-if="!state.error && !state.isBusy">
             <ide-layout views-layout-model="layoutModel"></ide-layout>
         </ide-container>
@@ -39,9 +39,9 @@
         <script type="text/javascript">
             angular.module('app', ['ngResource', 'ideLayout', 'ideUI', 'ideExtensions'])
                 .constant('branding', {
-                    name: 'Bike Park',
+                    name: 'Bike Park Server',
                     brand: 'Ne Se Chete',
-                    brandUrl: 'https://github.com/Ne-Se-Chete/BikePark',
+                    brandUrl: 'https://nesechete.com',
                     icons: {
                         faviconIco: '/services/web/ide-branding/images/favicon.ico',
                         favicon32: '/services/web/ide-branding/images/favicon-32x32.png',
@@ -50,9 +50,9 @@
                     logo: '/services/web/ide-branding/images/logo.svg',
                 })
                 .constant('extensionPoint', {
-                    perspectives: 'BikePark-backend',
-                    views: 'BikePark-backend-view',
-                    dialogWindows: 'BikePark-backend-dialog-window'
+                    perspectives: 'BikePark',
+                    views: 'BikePark-view',
+                    dialogWindows: 'BikePark-dialog-window'
                 })
                 .controller('ApplicationController', ['$scope', 'messageHub', 'Extensions', function ($scope, messageHub, Extensions) {
                     $scope.state = {
@@ -63,7 +63,7 @@
                     $scope.layoutModel = {
                         views: []
                     };
-                    Extensions.get('view', 'BikePark-backend-view').then(function (response) {
+                    Extensions.get('view', 'BikePark-view').then(function (response) {
                         $scope.layoutModel = {
                             views: response.filter(e => !e.isLaunchpad && e.perspectiveName === 'Settings').map(e => e.id)
                         };

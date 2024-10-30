@@ -1,0 +1,15 @@
+{
+  "files": [
+    {
+      "table": "STANDTYPE",
+      "schema": "PUBLIC",
+      "file": "BikePark/data/stand-type.csv",
+      "header": true,
+      "useHeaderNames": true,
+      "delimField": ",",
+      "delimEnclosing": "\"",
+      "distinguishEmptyFromNull": true,
+      "version": "1.0"
+    }
+  ]
+}

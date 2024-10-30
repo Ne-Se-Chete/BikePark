@@ -1,1 +1,1 @@
-{"module":"BikePark-backend/gen/bikePark/ui/launchpad/perspective.js","extensionPoint":"BikePark-backend","description":"BikePark-backend - Application Perspective"}
+{"module":"BikePark/gen/bikePark/ui/launchpad/perspective.js","extensionPoint":"BikePark","description":"BikePark - Application Perspective"}

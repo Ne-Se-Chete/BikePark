@@ -5,7 +5,7 @@ FROM ghcr.io/codbex/codbex-gaia:0.26.0
 
 COPY BikePark target/dirigible/repository/root/registry/public/BikePark
 
-ENV DIRIGIBLE_HOME_URL=/services/web/BikePark/gen/BikePark/index.html
+ENV DIRIGIBLE_HOME_URL=/services/web/BikePark/frontend/index.html
 
 ENV DIRIGIBLE_MULTY_TENANT_MODE=false
 

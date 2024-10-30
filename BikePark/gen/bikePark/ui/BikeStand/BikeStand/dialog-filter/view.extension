@@ -1,5 +1,5 @@
 {
-    "module": "BikePark-backend/gen/bikePark/ui/BikeStand/BikeStand/dialog-filter/view.js",
-    "extensionPoint": "BikePark-backend-dialog-window",
-    "description": "BikePark-backend - Application Dialog Window"
+    "module": "BikePark/gen/bikePark/ui/BikeStand/BikeStand/dialog-filter/view.js",
+    "extensionPoint": "BikePark-dialog-window",
+    "description": "BikePark - Application Dialog Window"
 }

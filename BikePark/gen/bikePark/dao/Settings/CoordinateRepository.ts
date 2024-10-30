@@ -210,7 +210,7 @@ export class CoordinateRepository {
     }
 
     private async triggerEvent(data: CoordinateEntityEvent | CoordinateUpdateEntityEvent) {
-        const triggerExtensions = await extensions.loadExtensionModules("BikePark-backend-Settings-Coordinate", ["trigger"]);
+        const triggerExtensions = await extensions.loadExtensionModules("BikePark-Settings-Coordinate", ["trigger"]);
         triggerExtensions.forEach(triggerExtension => {
             try {
                 triggerExtension.trigger(data);
@@ -218,6 +218,6 @@ export class CoordinateRepository {
                 console.error(error);
             }            
         });
-        producer.topic("BikePark-backend-Settings-Coordinate").send(JSON.stringify(data));
+        producer.topic("BikePark-Settings-Coordinate").send(JSON.stringify(data));
     }
 }

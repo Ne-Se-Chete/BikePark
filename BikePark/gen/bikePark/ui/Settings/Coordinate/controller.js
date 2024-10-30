@@ -1,9 +1,9 @@
 angular.module('page', ["ideUI", "ideView", "entityApi"])
 	.config(["messageHubProvider", function (messageHubProvider) {
-		messageHubProvider.eventIdPrefix = 'BikePark-backend.Settings.Coordinate';
+		messageHubProvider.eventIdPrefix = 'BikePark.Settings.Coordinate';
 	}])
 	.config(["entityApiProvider", function (entityApiProvider) {
-		entityApiProvider.baseUrl = "/services/ts/BikePark-backend/gen/bikePark/api/Settings/CoordinateService.ts";
+		entityApiProvider.baseUrl = "/services/ts/BikePark/gen/bikePark/api/Settings/CoordinateService.ts";
 	}])
 	.controller('PageController', ['$scope', 'messageHub', 'entityApi', 'Extensions', function ($scope, messageHub, entityApi, Extensions) {
 
@@ -12,7 +12,7 @@ angular.module('page', ["ideUI", "ideView", "entityApi"])
 		$scope.dataLimit = 20;
 
 		//-----------------Custom Actions-------------------//
-		Extensions.get('dialogWindow', 'BikePark-backend-custom-action').then(function (response) {
+		Extensions.get('dialogWindow', 'BikePark-custom-action').then(function (response) {
 			$scope.pageActions = response.filter(e => e.perspective === "Settings" && e.view === "Coordinate" && (e.type === "page" || e.type === undefined));
 			$scope.entityActions = response.filter(e => e.perspective === "Settings" && e.view === "Coordinate" && e.type === "entity");
 		});

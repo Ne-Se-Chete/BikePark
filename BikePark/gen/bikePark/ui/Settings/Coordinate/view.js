@@ -8,7 +8,7 @@ const viewData = {
     label: "Coordinate",
     factory: "frame",
     region: "center",
-    link: "/services/web/BikePark-backend/gen/bikePark/ui/Settings/Coordinate/index.html",
+    link: "/services/web/BikePark/gen/bikePark/ui/Settings/Coordinate/index.html",
     perspectiveName: "Settings",
 };
 

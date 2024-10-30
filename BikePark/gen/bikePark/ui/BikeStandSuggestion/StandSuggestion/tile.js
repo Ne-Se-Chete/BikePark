@@ -5,14 +5,14 @@
  */
 exports.getTile = function () {
     return {
-        group: "BikePark-backend",
+        group: "BikePark",
         name: "StandSuggestion",
         caption: "Manage entity StandSuggestion",
         tooltip: "StandSuggestion",
         type: "PRIMARY",
         report: "false",
         icon: "/services/web/resources/unicons/file.svg",
-        location: "/services/web/BikePark-backend/gen/bikePark/ui/BikeStandSuggestion/index.html",
+        location: "/services/web/BikePark/gen/bikePark/ui/BikeStandSuggestion/index.html",
         order: "100",
         groupOrder: "200",
     };

@@ -1,9 +1,9 @@
 angular.module('page', ["ideUI", "ideView", "entityApi"])
 	.config(["messageHubProvider", function (messageHubProvider) {
-		messageHubProvider.eventIdPrefix = 'BikePark-backend.Settings.StandType';
+		messageHubProvider.eventIdPrefix = 'BikePark.Settings.StandType';
 	}])
 	.config(["entityApiProvider", function (entityApiProvider) {
-		entityApiProvider.baseUrl = "/services/ts/BikePark-backend/gen/bikePark/api/Settings/StandTypeService.ts";
+		entityApiProvider.baseUrl = "/services/ts/BikePark/gen/bikePark/api/Settings/StandTypeService.ts";
 	}])
 	.controller('PageController', ['$scope', 'messageHub', 'ViewParameters', 'entityApi', function ($scope, messageHub, ViewParameters, entityApi) {
 

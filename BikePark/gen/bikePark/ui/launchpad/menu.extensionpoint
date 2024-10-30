@@ -1,4 +1,4 @@
 {
-    "name": "BikePark-backend-menu",
-    "description": "BikePark-backend - Extension Point for the Application Main Menu"
+    "name": "BikePark-menu",
+    "description": "BikePark - Extension Point for the Application Main Menu"
 }

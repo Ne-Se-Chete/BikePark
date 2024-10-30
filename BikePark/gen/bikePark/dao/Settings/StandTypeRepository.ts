@@ -196,7 +196,7 @@ export class StandTypeRepository {
     }
 
     private async triggerEvent(data: StandTypeEntityEvent | StandTypeUpdateEntityEvent) {
-        const triggerExtensions = await extensions.loadExtensionModules("BikePark-backend-Settings-StandType", ["trigger"]);
+        const triggerExtensions = await extensions.loadExtensionModules("BikePark-Settings-StandType", ["trigger"]);
         triggerExtensions.forEach(triggerExtension => {
             try {
                 triggerExtension.trigger(data);
@@ -204,6 +204,6 @@ export class StandTypeRepository {
                 console.error(error);
             }            
         });
-        producer.topic("BikePark-backend-Settings-StandType").send(JSON.stringify(data));
+        producer.topic("BikePark-Settings-StandType").send(JSON.stringify(data));
     }
 }

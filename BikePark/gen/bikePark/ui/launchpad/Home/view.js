@@ -4,11 +4,11 @@
  * Do not modify the content as it may be re-generated again.
  */
 const viewData = {
-    id: "BikePark-backend-home-launchpad",
+    id: "BikePark-home-launchpad",
     label: "Home Launchpad",
     factory: "frame",
     region: "center",
-    link: "/services/web/BikePark-backend/gen/bikePark/ui/launchpad/Home/index.html",
+    link: "/services/web/BikePark/gen/bikePark/ui/launchpad/Home/index.html",
     isLaunchpad: true,
 };
 

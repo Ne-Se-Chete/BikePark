@@ -1,4 +1,4 @@
 {
-    "name": "BikePark-backend-BikeStandSuggestion-StandSuggestion",
-    "description": "Extension Point for the BikePark-backend-BikeStandSuggestion-StandSuggestion entity"
+    "name": "BikePark-BikeStandSuggestion-StandSuggestion",
+    "description": "Extension Point for the BikePark-BikeStandSuggestion-StandSuggestion entity"
 }

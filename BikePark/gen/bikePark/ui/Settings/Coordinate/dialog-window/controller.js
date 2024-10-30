@@ -1,9 +1,9 @@
 angular.module('page', ["ideUI", "ideView", "entityApi"])
 	.config(["messageHubProvider", function (messageHubProvider) {
-		messageHubProvider.eventIdPrefix = 'BikePark-backend.Settings.Coordinate';
+		messageHubProvider.eventIdPrefix = 'BikePark.Settings.Coordinate';
 	}])
 	.config(["entityApiProvider", function (entityApiProvider) {
-		entityApiProvider.baseUrl = "/services/ts/BikePark-backend/gen/bikePark/api/Settings/CoordinateService.ts";
+		entityApiProvider.baseUrl = "/services/ts/BikePark/gen/bikePark/api/Settings/CoordinateService.ts";
 	}])
 	.controller('PageController', ['$scope', 'messageHub', 'ViewParameters', 'entityApi', function ($scope, messageHub, ViewParameters, entityApi) {
 

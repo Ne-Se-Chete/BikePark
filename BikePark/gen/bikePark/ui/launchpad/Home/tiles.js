@@ -9,7 +9,7 @@ import { user } from "sdk/security";
 
 let tiles = {};
 
-let tileExtensions = await extensions.loadExtensionModules("BikePark-backend-tile");
+let tileExtensions = await extensions.loadExtensionModules("BikePark-tile");
 for (let i = 0; i < tileExtensions?.length; i++) {
     let tile = tileExtensions[i].getTile();
 

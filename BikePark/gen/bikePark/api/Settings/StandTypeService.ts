@@ -4,7 +4,7 @@ import { StandTypeRepository, StandTypeEntityOptions } from "../../dao/Settings/
 import { ValidationError } from "../utils/ValidationError";
 import { HttpUtils } from "../utils/HttpUtils";
 
-const validationModules = await Extensions.loadExtensionModules("BikePark-backend-Settings-StandType", ["validate"]);
+const validationModules = await Extensions.loadExtensionModules("BikePark-Settings-StandType", ["validate"]);
 
 @Controller
 class StandTypeService {
@@ -30,7 +30,7 @@ class StandTypeService {
         try {
             this.validateEntity(entity);
             entity.Id = this.repository.create(entity);
-            response.setHeader("Content-Location", "/services/ts/BikePark-backend/gen/bikePark/api/Settings/StandTypeService.ts/" + entity.Id);
+            response.setHeader("Content-Location", "/services/ts/BikePark/gen/bikePark/api/Settings/StandTypeService.ts/" + entity.Id);
             response.setStatus(response.CREATED);
             return entity;
         } catch (error: any) {
@@ -122,8 +122,8 @@ class StandTypeService {
         if (entity.Name?.length > 20) {
             throw new ValidationError(`The 'Name' exceeds the maximum length of [20] characters`);
         }
-        if (entity.Description?.length > 200) {
-            throw new ValidationError(`The 'Description' exceeds the maximum length of [200] characters`);
+        if (entity.Description?.length > 2000) {
+            throw new ValidationError(`The 'Description' exceeds the maximum length of [2000] characters`);
         }
         for (const next of validationModules) {
             next.validate(entity);

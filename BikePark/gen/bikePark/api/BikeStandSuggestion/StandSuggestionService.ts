@@ -4,7 +4,7 @@ import { StandSuggestionRepository, StandSuggestionEntityOptions } from "../../d
 import { ValidationError } from "../utils/ValidationError";
 import { HttpUtils } from "../utils/HttpUtils";
 
-const validationModules = await Extensions.loadExtensionModules("BikePark-backend-BikeStandSuggestion-StandSuggestion", ["validate"]);
+const validationModules = await Extensions.loadExtensionModules("BikePark-BikeStandSuggestion-StandSuggestion", ["validate"]);
 
 @Controller
 class StandSuggestionService {
@@ -30,7 +30,7 @@ class StandSuggestionService {
         try {
             this.validateEntity(entity);
             entity.Id = this.repository.create(entity);
-            response.setHeader("Content-Location", "/services/ts/BikePark-backend/gen/bikePark/api/BikeStandSuggestion/StandSuggestionService.ts/" + entity.Id);
+            response.setHeader("Content-Location", "/services/ts/BikePark/gen/bikePark/api/BikeStandSuggestion/StandSuggestionService.ts/" + entity.Id);
             response.setStatus(response.CREATED);
             return entity;
         } catch (error: any) {

@@ -5,14 +5,14 @@
  */
 exports.getTile = function () {
     return {
-        group: "BikePark-backend",
+        group: "BikePark",
         name: "BikeStand",
         caption: "Manage entity BikeStand",
         tooltip: "BikeStand",
         type: "PRIMARY",
         report: "false",
         icon: "/services/web/resources/unicons/file.svg",
-        location: "/services/web/BikePark-backend/gen/bikePark/ui/BikeStand/index.html",
+        location: "/services/web/BikePark/gen/bikePark/ui/BikeStand/index.html",
         order: "100",
         groupOrder: "100",
     };

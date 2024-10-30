@@ -6,7 +6,7 @@
 const viewData = {
     id: "BikeStand-filter",
     label: "BikeStand Filter",
-    link: "/services/web/BikePark-backend/gen/bikePark/ui/BikeStand/BikeStand/dialog-filter/index.html",
+    link: "/services/web/BikePark/gen/bikePark/ui/BikeStand/BikeStand/dialog-filter/index.html",
     perspectiveName: "BikeStand",
 };
 

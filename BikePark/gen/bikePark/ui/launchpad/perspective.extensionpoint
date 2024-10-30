@@ -1,4 +1,4 @@
 {
-    "name": "BikePark-backend-perspective",
-    "description": "BikePark-backend - Extension Point for the Application Perspective Providers"
+    "name": "BikePark-perspective",
+    "description": "BikePark - Extension Point for the Application Perspective Providers"
 }

@@ -1,0 +1,5 @@
+{
+    "module": "BikePark/gen/bikePark/ui/Settings/ApiKey/dialog-filter/view.js",
+    "extensionPoint": "BikePark-dialog-window",
+    "description": "BikePark - Application Dialog Window"
+}

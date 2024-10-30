@@ -1,9 +1,9 @@
 angular.module('page', ["ideUI", "ideView", "entityApi"])
 	.config(["messageHubProvider", function (messageHubProvider) {
-		messageHubProvider.eventIdPrefix = 'BikePark-backend.BikeStandSuggestion.StandSuggestion';
+		messageHubProvider.eventIdPrefix = 'BikePark.BikeStandSuggestion.StandSuggestion';
 	}])
 	.config(["entityApiProvider", function (entityApiProvider) {
-		entityApiProvider.baseUrl = "/services/ts/BikePark-backend/gen/bikePark/api/BikeStandSuggestion/StandSuggestionService.ts";
+		entityApiProvider.baseUrl = "/services/ts/BikePark/gen/bikePark/api/BikeStandSuggestion/StandSuggestionService.ts";
 	}])
 	.controller('PageController', ['$scope', 'Extensions', 'messageHub', 'entityApi', function ($scope, Extensions, messageHub, entityApi) {
 
@@ -19,7 +19,7 @@ angular.module('page', ["ideUI", "ideView", "entityApi"])
 		$scope.action = 'select';
 
 		//-----------------Custom Actions-------------------//
-		Extensions.get('dialogWindow', 'BikePark-backend-custom-action').then(function (response) {
+		Extensions.get('dialogWindow', 'BikePark-custom-action').then(function (response) {
 			$scope.entityActions = response.filter(e => e.perspective === "BikeStandSuggestion" && e.view === "StandSuggestion" && e.type === "entity");
 		});
 
@@ -40,6 +40,7 @@ angular.module('page', ["ideUI", "ideView", "entityApi"])
 		messageHub.onDidReceiveMessage("clearDetails", function (msg) {
 			$scope.$apply(function () {
 				$scope.entity = {};
+				$scope.optionsStandType = [];
 				$scope.optionsCoordinate = [];
 				$scope.action = 'select';
 			});
@@ -48,6 +49,7 @@ angular.module('page', ["ideUI", "ideView", "entityApi"])
 		messageHub.onDidReceiveMessage("entitySelected", function (msg) {
 			$scope.$apply(function () {
 				$scope.entity = msg.data.entity;
+				$scope.optionsStandType = msg.data.optionsStandType;
 				$scope.optionsCoordinate = msg.data.optionsCoordinate;
 				$scope.action = 'select';
 			});
@@ -56,6 +58,7 @@ angular.module('page', ["ideUI", "ideView", "entityApi"])
 		messageHub.onDidReceiveMessage("createEntity", function (msg) {
 			$scope.$apply(function () {
 				$scope.entity = {};
+				$scope.optionsStandType = msg.data.optionsStandType;
 				$scope.optionsCoordinate = msg.data.optionsCoordinate;
 				$scope.action = 'create';
 			});
@@ -64,6 +67,7 @@ angular.module('page', ["ideUI", "ideView", "entityApi"])
 		messageHub.onDidReceiveMessage("updateEntity", function (msg) {
 			$scope.$apply(function () {
 				$scope.entity = msg.data.entity;
+				$scope.optionsStandType = msg.data.optionsStandType;
 				$scope.optionsCoordinate = msg.data.optionsCoordinate;
 				$scope.action = 'update';
 			});

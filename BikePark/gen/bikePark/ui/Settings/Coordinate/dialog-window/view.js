@@ -6,7 +6,7 @@
 const viewData = {
     id: "Coordinate-details",
     label: "Coordinate",
-    link: "/services/web/BikePark-backend/gen/bikePark/ui/Settings/Coordinate/dialog-window/index.html",
+    link: "/services/web/BikePark/gen/bikePark/ui/Settings/Coordinate/dialog-window/index.html",
     perspectiveName: "Settings",
 };
 
