@@ -48,7 +48,8 @@
 
 #googleMap {
   width: 100%;
-  height: 0;
+  height: 700px; /* Set this to whatever smaller height you prefer */
+  max-height: 100vh;
   padding-bottom: 100%;
   background-color: #e0f2f1;
   border: 4px solid var(--primary-color);
