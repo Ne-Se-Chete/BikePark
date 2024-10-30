@@ -1,4 +1,4 @@
-let map, marker, apiKey, bikeSpotMarkers = [], bikeSpotSuggestionsMarkers = [];
+let map, marker, apiKey, bikeSpotMarkers = [], bikeSpotSuggestionsMarkers = [], allStandTypes = {};
 
 async function loadGoogleMapsScript() {
     try {
@@ -115,7 +115,7 @@ async function loadStandTypes() {
 
         standTypes.forEach(type => {
             const option = document.createElement("option");
-            option.value = type.Id;
+            option.value = type.Name;
             option.textContent = type.Name;
             standTypeSelect.appendChild(option);
         });
@@ -170,7 +170,7 @@ function displayBikeParkSpots(bikeStands) {
     clearAllMarkers();
 
     bikeStands.forEach(stand => {
-        const { Location, SlotCount, StandType, Latitude, Longitude } = stand;
+        const { Location, SlotCount, StandTypeName, Latitude, Longitude } = stand;
         const position = { lat: parseFloat(Latitude), lng: parseFloat(Longitude) };
         const bikeSpotMarker = new google.maps.Marker({
             position,
@@ -178,7 +178,7 @@ function displayBikeParkSpots(bikeStands) {
         });
 
         bikeSpotMarker.addListener("click", () => {
-            showBikeSpotInfo(Location, SlotCount, StandType, Latitude, Longitude);
+            showBikeSpotInfo(Location, SlotCount, StandTypeName, Latitude, Longitude);
         });
 
         bikeSpotMarkers.push(bikeSpotMarker);
@@ -189,24 +189,34 @@ function displayBikeParkSuggestions(suggestions) {
     clearAllMarkers();
 
     suggestions.forEach(suggestion => {
-        const { Location, SlotCount, StandType, Latitude, Longitude } = suggestion;
+        const { Location, SlotCount, StandTypeName, Latitude, Longitude } = suggestion;
         const position = { lat: parseFloat(Latitude), lng: parseFloat(Longitude) };
         const bikeSpotSuggestionMarker = new google.maps.Marker({
             position,
             map: map,
+            icon: {
+                path: google.maps.SymbolPath.CIRCLE,
+                fillColor: "blue",
+                fillOpacity: 1,
+                scale: 8,  // adjust size as needed
+                strokeColor: "darkblue",
+                strokeWeight: 2,
+            }
         });
 
         bikeSpotSuggestionMarker.addListener("click", () => {
-            showBikeSpotInfo(Location, SlotCount, StandType, Latitude, Longitude);
+            showBikeSpotInfo(Location, SlotCount, StandTypeName, Latitude, Longitude);
         });
 
         bikeSpotSuggestionsMarkers.push(bikeSpotSuggestionMarker);
     });
 }
 
+
 function showBikeSpotInfo(name, slotCount, standType, latitude, longitude) {
     document.getElementById("infoName").textContent = name;
     document.getElementById("infoSlotCount").textContent = slotCount;
+    document.getElementById("infoStandType").textContent = standType;
     document.getElementById("infoStandType").textContent = standType;
 
     getAddress(latitude, longitude).then(address => {

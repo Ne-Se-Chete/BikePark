@@ -34,7 +34,7 @@ class BikeParkService {
 
         let fullBikeStands = allBikeStands.map(bikeStand => {
             return {
-                LocationName: bikeStand.Location,
+                Location: bikeStand.Location,
                 SlotCount: bikeStand.SlotCount,
                 Latitude: coordinateMap.get(bikeStand.Coordinate || 0)?.latitude,
                 Longitude: coordinateMap.get(bikeStand.Coordinate || 0)?.longitude,
@@ -61,7 +61,7 @@ class BikeParkService {
                 ...bikeStandSuggestion,
                 Latitude: coordinateMap.get(bikeStandSuggestion.Coordinate || 0)?.latitude,
                 Longitude: coordinateMap.get(bikeStandSuggestion.Coordinate || 0)?.longitude,
-                standTypeName: standTypeMap.get(bikeStandSuggestion.StandType || 0)
+                StandTypeName: standTypeMap.get(bikeStandSuggestion.StandType || 0)
             };
         });
 
