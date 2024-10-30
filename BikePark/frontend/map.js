@@ -115,7 +115,7 @@ async function loadStandTypes() {
 
         standTypes.forEach(type => {
             const option = document.createElement("option");
-            option.value = type.Name;
+            option.value = type.Id;
             option.textContent = type.Name;
             standTypeSelect.appendChild(option);
         });
