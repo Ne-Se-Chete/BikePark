@@ -4,7 +4,7 @@ import { CoordinateRepository as CoordinateDao } from "BikePark/gen/bikePark/dao
 import { StandTypeRepository as StandTypeDao } from "BikePark/gen/bikePark/dao/Settings/StandTypeRepository";
 import { ApiKeyRepository as ApiKeyDao } from "BikePark/gen/bikePark/dao/Settings/ApiKeyRepository"
 
-import { Controller, Get, Post, response } from "sdk/http";
+import { Controller, Get, Post, response, } from "sdk/http";
 
 @Controller
 class BikeParkService {
@@ -68,53 +68,6 @@ class BikeParkService {
         return fullBikeStandSuggestions;
     }
 
-    @Get("/ClosestBikeStands")
-    public ClosestBikeStands(body: any) {
-        try {
-            ["Latitude", "Longitude", "Limit"].forEach(elem => {
-                if (!body.hasOwnProperty(elem)) {
-                    response.setStatus(response.BAD_REQUEST);
-                    return "Body does not match the requirements!";
-                }
-            })
-
-            let allBikeStands = this.bikeStandDao.findAll();
-            let coordinates = this.coordinateDao.findAll();
-
-            let coordinateMap = new Map(coordinates.map(c => [c.Id, { latitude: c.Latitude, longitude: c.Longitude }]));
-
-            let bikeStandsWithDistance = allBikeStands
-                .map(bikeStand => {
-                    const coord = coordinateMap.get(bikeStand.Coordinate || 0);
-
-                    if (coord) {
-                        const distance = this.calculateDistance(
-                            body.Latitude,
-                            body.Longitude,
-                            coord.latitude || 0,
-                            coord.longitude || 0
-                        );
-                        return {
-                            ...bikeStand,
-                            latitude: coord.latitude,
-                            longitude: coord.longitude,
-                            distance
-                        };
-                    }
-                    return null;
-                })
-                .filter(bikeStand => bikeStand !== null) as any[];
-
-            bikeStandsWithDistance.sort((a, b) => a.distance - b.distance);
-
-            return bikeStandsWithDistance.slice(0, body.Limit);
-        }
-        catch (error) {
-            response.setStatus(response.BAD_REQUEST);
-            return "An error occurred posting new suggestion!";
-        }
-    }
-
     @Get("/StandTypesData")
     public StandTypesData() {
         let allStandTypes = this.standTypeDao.findAll();
@@ -136,16 +89,18 @@ class BikeParkService {
     }
 
     @Post("/BikeStandSuggestion")
-    public createBikeStandSuggestion(body: any) {
+    public createBikeStandSuggestion(body: any, _: any) {
+
         try {
-            ["Location", "SlotCount", "StandTypeId", "Latitude", "Longitude"].forEach(elem => {
-                if (!body.hasOwnProperty(elem)) {
+
+            ["Location", "SlotCount", "StandType", "Latitude", "Longitude"].forEach(elem => {
+                if (!body[elem]) {
                     response.setStatus(response.BAD_REQUEST);
                     return "Body does not match the requirements!";
                 }
-            })
+            });
 
-            let standType = this.standTypeDao.findById(body.StandTypeId);
+            let standType = this.standTypeDao.findById(body.StandType);
 
             if (!standType) {
                 response.setStatus(response.BAD_REQUEST);
@@ -191,7 +146,7 @@ class BikeParkService {
             let newSuggestion = this.bikeStandSuggestionDao.create({
                 Location: body.Location,
                 SlotCount: body.SlotCount,
-                StandType: body.StandTypeId,
+                StandType: body.StandType,
                 Coordinate: coordinateId
             });
 

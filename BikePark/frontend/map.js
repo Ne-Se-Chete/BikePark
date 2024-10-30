@@ -1,4 +1,4 @@
-let map, marker, bikeSpotMarkers = [], bikeSpotSuggestionsMarkers = [];
+let map, marker, apiKey, bikeSpotMarkers = [], bikeSpotSuggestionsMarkers = [];
 
 async function loadGoogleMapsScript() {
     try {
@@ -8,7 +8,7 @@ async function loadGoogleMapsScript() {
             throw new Error("Failed to fetch API key");
         }
 
-        let apiKey = await response.text();
+        apiKey = await response.text();
         apiKey = apiKey.replace(/^"(.*)"$/, '$1');
 
         const script = document.createElement("script");
@@ -59,7 +59,7 @@ async function getBikeParkSuggestions() {
 }
 
 function myMap() {
-    const sofiaCoords = { lat: 42.6977, lng: 23.3219 }; // Sofia, Bulgaria
+    const sofiaCoords = { lat: 42.6977, lng: 23.3219 };
     const mapProp = {
         center: sofiaCoords,
         zoom: 13,
@@ -140,13 +140,8 @@ document.getElementById("finalSubmitButton").addEventListener("click", () => {
         Longitude: parseFloat(longitude),
     };
 
-    console.log("Data: ", data);
-
     fetch("http://localhost:8080/services/ts/BikePark/api/BikeParkService.ts/BikeStandSuggestion", {
         method: "POST",
-        headers: {
-            "Content-Type": "application/json",
-        },
         body: JSON.stringify(data),
     })
         .then(response => {
@@ -175,11 +170,15 @@ function displayBikeParkSpots(bikeStands) {
     clearAllMarkers();
 
     bikeStands.forEach(stand => {
-        const { Latitude, Longitude } = stand;
-        const position = { lat: Latitude, lng: Longitude };
+        const { Location, SlotCount, StandType, Latitude, Longitude } = stand;
+        const position = { lat: parseFloat(Latitude), lng: parseFloat(Longitude) };
         const bikeSpotMarker = new google.maps.Marker({
             position,
             map: map,
+        });
+
+        bikeSpotMarker.addListener("click", () => {
+            showBikeSpotInfo(Location, SlotCount, StandType, Latitude, Longitude);
         });
 
         bikeSpotMarkers.push(bikeSpotMarker);
@@ -189,17 +188,39 @@ function displayBikeParkSpots(bikeStands) {
 function displayBikeParkSuggestions(suggestions) {
     clearAllMarkers();
 
-    suggestions.forEach(stand => {
-        const { Latitude, Longitude } = stand;
-        const position = { lat: Latitude, lng: Longitude };
+    suggestions.forEach(suggestion => {
+        const { Location, SlotCount, StandType, Latitude, Longitude } = suggestion;
+        const position = { lat: parseFloat(Latitude), lng: parseFloat(Longitude) };
         const bikeSpotSuggestionMarker = new google.maps.Marker({
             position,
             map: map,
         });
 
+        bikeSpotSuggestionMarker.addListener("click", () => {
+            showBikeSpotInfo(Location, SlotCount, StandType, Latitude, Longitude);
+        });
+
         bikeSpotSuggestionsMarkers.push(bikeSpotSuggestionMarker);
     });
 }
+
+function showBikeSpotInfo(name, slotCount, standType, latitude, longitude) {
+    document.getElementById("infoName").textContent = name;
+    document.getElementById("infoSlotCount").textContent = slotCount;
+    document.getElementById("infoStandType").textContent = standType;
+
+    getAddress(latitude, longitude).then(address => {
+        document.getElementById("infoAddress").textContent = address || "Address not found";
+    });
+
+    document.getElementById("bikeSpotInfoSidebar").classList.add("open");
+    document.querySelector(".container").classList.add("shift-left");
+}
+
+document.getElementById("closeSidebarButton").addEventListener("click", () => {
+    document.getElementById("bikeSpotInfoSidebar").classList.remove("open");
+    document.querySelector(".container").classList.remove("shift-left");
+});
 
 $('#bikeSpotModal').on('hidden.bs.modal', function () {
     document.getElementById("bikeSpotForm").reset();
@@ -210,6 +231,29 @@ $('#bikeSpotModal').on('hidden.bs.modal', function () {
     defaultOption.textContent = "Select Stand Type";
     document.getElementById("standType").appendChild(defaultOption);
 });
+
+async function getAddress(latitude, longitude) {
+    const url = `https://maps.googleapis.com/maps/api/geocode/json?latlng=${latitude},${longitude}&key=${apiKey}`;
+
+    try {
+        const response = await fetch(url);
+        const data = await response.json();
+
+        if (data.status === "OK") {
+            return data.results[0].formatted_address;
+        }
+
+        else {
+            console.error("Geocode error:", data.status);
+            return null;
+        }
+    }
+
+    catch (error) {
+        console.error("Error fetching address:", error);
+        return null;
+    }
+}
 
 function removeMarker() {
     if (marker) {
