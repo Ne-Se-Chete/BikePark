@@ -9,4 +9,4 @@ ENV DIRIGIBLE_HOME_URL=/services/web/BikePark/frontend/index.html
 
 ENV DIRIGIBLE_MULTY_TENANT_MODE=false
 
-EXPOSE 8080
+EXPOSE 80
