@@ -13,7 +13,7 @@ async function loadGoogleMapsScript() {
     }
 
     catch (error) {
-        console.error("Error loading Google Maps API key:", error);
+        console.error("Error loading Google Maps map:", error);
     }
 }
 
