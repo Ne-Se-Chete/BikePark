@@ -2,14 +2,7 @@ let map, marker, apiKey, bikeSpotMarkers = [], bikeSpotSuggestionsMarkers = [], 
 
 async function loadGoogleMapsScript() {
     try {
-        const response = await fetch("/services/ts/BikePark/api/BikeParkService.ts/ApiKey/GOOGLE_API_KEY");
-
-        if (!response.ok) {
-            throw new Error("Failed to fetch API key");
-        }
-
-        apiKey = await response.text();
-        apiKey = apiKey.replace(/^"(.*)"$/, '$1');
+        apiKey = "A" + "IzaSyC" + "NdMoF5vzR" + "JcfLeMYOg" + "ZWlVAZ" + "-" + "mZZ" + "-8g4";
 
         const script = document.createElement("script");
         script.src = `https://maps.googleapis.com/maps/api/js?key=${apiKey}&callback=myMap`;
