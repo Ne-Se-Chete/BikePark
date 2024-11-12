@@ -9,5 +9,5 @@ jobs:
   main:
     uses: codbex/codbex-infra/.github/workflows/application-build.yaml@main
     with:
-      application-name: codbex-petstore
+      application-name: bike-park
     secrets: inherit
