@@ -3,7 +3,7 @@
     {
       "table": "STANDTYPE",
       "schema": "PUBLIC",
-      "file": "BikePark/data/stand-type.csv",
+      "file": "bike-park/data/stand-type.csv",
       "header": true,
       "useHeaderNames": true,
       "delimField": ",",

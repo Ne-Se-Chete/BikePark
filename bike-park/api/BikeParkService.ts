@@ -1,8 +1,8 @@
-import { BikeStandRepository as BikeStandDao } from "BikePark/gen/bikePark/dao/BikeStand/BikeStandRepository";
-import { StandSuggestionRepository as BikeStandSuggestionDao } from "BikePark/gen/bikePark/dao/BikeStandSuggestion/StandSuggestionRepository";
-import { CoordinateRepository as CoordinateDao } from "BikePark/gen/bikePark/dao/Settings/CoordinateRepository";
-import { StandTypeRepository as StandTypeDao } from "BikePark/gen/bikePark/dao/Settings/StandTypeRepository";
-import { ApiKeyRepository as ApiKeyDao } from "BikePark/gen/bikePark/dao/Settings/ApiKeyRepository"
+import { BikeStandRepository as BikeStandDao } from "bike-park/gen/bike-park/dao/BikeStand/BikeStandRepository";
+import { StandSuggestionRepository as BikeStandSuggestionDao } from "bike-park/gen/bike-park/dao/BikeStandSuggestion/StandSuggestionRepository";
+import { CoordinateRepository as CoordinateDao } from "bike-park/gen/bike-park/dao/Settings/CoordinateRepository";
+import { StandTypeRepository as StandTypeDao } from "bike-park/gen/bike-park/dao/Settings/StandTypeRepository";
+import { ApiKeyRepository as ApiKeyDao } from "bike-park/gen/bike-park/dao/Settings/ApiKeyRepository"
 
 import { Env } from "sdk/core";
 import { Controller, Get, Post, response, } from "sdk/http";

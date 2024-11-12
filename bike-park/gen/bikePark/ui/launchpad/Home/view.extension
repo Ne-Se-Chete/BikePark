@@ -1,5 +1,0 @@
-{
-    "module": "BikePark/gen/bikePark/ui/launchpad/Home/view.js",
-    "extensionPoint": "BikePark-view",
-    "description": "BikePark - Application View"
-}
