@@ -22,7 +22,7 @@ jobs:
 
       - name: Build Docker Image
         run: |
-          docker buildx build --tag bike-park -o type=image --build-arg GOOGLE_API_KEY ${{ secrets.GOOGLE_API_KEY }} --platform=linux/arm64,linux/amd64 .
+          docker buildx build --tag bike-park -o type=image --build-arg "GOOGLE_API_KEY=${{ secrets.GOOGLE_API_KEY }}" --platform=linux/arm64,linux/amd64 .
           
       - name: Login to GitHub Container Registry
         run: |
