@@ -56,5 +56,5 @@ jobs:
           body: |
             ## Release - ${{ inputs.release-version }}
             ${{
-              '## Release Notes\n\n' + inputs.release-content  # Combine the release content
+              '## Release Notes\n\n${{ inputs.release-version }}'  # Combine the release content
             }}
