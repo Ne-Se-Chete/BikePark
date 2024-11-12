@@ -1,13 +1,21 @@
-name: Pull Request - Application
-
+name: Pull Request - App
 on:
   pull_request:
     branches: 
       - main
-
 jobs:
   main:
-    uses: codbex/codbex-infra/.github/workflows/application-pull-request.yaml@main
-    with:
-      application-name: bike-park
-    secrets: inherit
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+      - name: Initialize Buildx
+        run: |
+          docker buildx create --name builder || true
+          docker buildx use builder
+      - name: Build Docker Image
+        run: |
+          docker buildx build --tag bike-park -o type=image --platform=linux/arm64,linux/amd64 .
