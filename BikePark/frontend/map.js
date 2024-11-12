@@ -2,7 +2,7 @@ let map, marker, apiKey, bikeSpotMarkers = [], bikeSpotSuggestionsMarkers = [], 
 
 async function loadGoogleMapsScript() {
     try {
-        const response = await fetch("/services/ts/BikePark/api/BikeParkService.ts/ApiKey/1");
+        const response = await fetch("/services/ts/BikePark/api/BikeParkService.ts/ApiKey/GOOGLE_API_KEY");
 
         if (!response.ok) {
             throw new Error("Failed to fetch API key");
