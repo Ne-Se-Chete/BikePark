@@ -2,7 +2,7 @@ let map, marker, apiKey, bikeSpotMarkers = [], bikeSpotSuggestionsMarkers = [], 
 
 async function loadGoogleMapsScript() {
     try {
-        const response = await fetch("http://localhost:8080/services/ts/BikePark/api/BikeParkService.ts/ApiKey/1");
+        const response = await fetch("/services/ts/BikePark/api/BikeParkService.ts/ApiKey/GOOGLE_API_KEY");
 
         if (!response.ok) {
             throw new Error("Failed to fetch API key");
@@ -17,7 +17,9 @@ async function loadGoogleMapsScript() {
         script.defer = true;
 
         document.head.appendChild(script);
-    } catch (error) {
+    }
+
+    catch (error) {
         console.error("Error loading Google Maps API key:", error);
     }
 }
@@ -26,7 +28,7 @@ loadGoogleMapsScript();
 
 async function getBikeParkSpots() {
     try {
-        const response = await fetch("http://localhost:8080/services/ts/BikePark/api/BikeParkService.ts/BikeStandData");
+        const response = await fetch("/services/ts/BikePark/api/BikeParkService.ts/BikeStandData");
 
         if (!response.ok) {
             throw new Error("Failed to fetch bike stands");
@@ -43,7 +45,7 @@ async function getBikeParkSpots() {
 
 async function getBikeParkSuggestions() {
     try {
-        const response = await fetch("http://localhost:8080/services/ts/BikePark/api/BikeParkService.ts/BikeStandSuggestionData");
+        const response = await fetch("/services/ts/BikePark/api/BikeParkService.ts/BikeStandSuggestionData");
 
         if (!response.ok) {
             throw new Error("Failed to fetch bike stands");
@@ -104,7 +106,7 @@ function addMarker(location) {
 
 async function loadStandTypes() {
     try {
-        const response = await fetch("http://localhost:8080/services/ts/BikePark/api/BikeParkService.ts/StandTypesData");
+        const response = await fetch("/services/ts/BikePark/api/BikeParkService.ts/StandTypesData");
 
         if (!response.ok) {
             throw new Error("Failed to fetch stand types");
@@ -140,7 +142,7 @@ document.getElementById("finalSubmitButton").addEventListener("click", () => {
         Longitude: parseFloat(longitude),
     };
 
-    fetch("http://localhost:8080/services/ts/BikePark/api/BikeParkService.ts/BikeStandSuggestion", {
+    fetch("/services/ts/BikePark/api/BikeParkService.ts/BikeStandSuggestion", {
         method: "POST",
         body: JSON.stringify(data),
     })

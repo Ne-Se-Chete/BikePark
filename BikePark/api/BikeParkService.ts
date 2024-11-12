@@ -4,6 +4,7 @@ import { CoordinateRepository as CoordinateDao } from "BikePark/gen/bikePark/dao
 import { StandTypeRepository as StandTypeDao } from "BikePark/gen/bikePark/dao/Settings/StandTypeRepository";
 import { ApiKeyRepository as ApiKeyDao } from "BikePark/gen/bikePark/dao/Settings/ApiKeyRepository"
 
+import { Env } from "sdk/core";
 import { Controller, Get, Post, response, } from "sdk/http";
 
 @Controller
@@ -75,17 +76,17 @@ class BikeParkService {
         return allStandTypes;
     }
 
-    @Get("/ApiKey/:ApiKeyId")
+    @Get("/ApiKey/:ApiKeyName")
     public ApiKey(_: any, ctx: any) {
-        const apiKeyId = ctx.pathParameters.ApiKeyId;
-        const apiKey = this.apiKeyDao.findById(apiKeyId);
+        const apiKeyName = ctx.pathParameters.ApiKeyName;
+        const apiKey = Env.get(apiKeyName);
 
         if (!apiKey) {
             response.setStatus(response.BAD_REQUEST);
-            return "There isn't an API KEY with this Id!";
+            return "There isn't an API KEY with this Name!";
         }
 
-        return apiKey.Key;
+        return apiKey;
     }
 
     @Post("/BikeStandSuggestion")
