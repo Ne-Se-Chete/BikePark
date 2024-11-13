@@ -1,4 +1,4 @@
-FROM dirigiblelabs/dirigble:latest
+FROM dirigiblelabs/dirigible:latest
 
 COPY bike-park target/dirigible/repository/root/registry/public/bike-park
 
