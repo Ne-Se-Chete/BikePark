@@ -1,4 +1,4 @@
-FROM ghcr.io/codbex/codbex-gaia:0.26.0
+FROM dirigiblelabs/dirigble:latest
 
 COPY bike-park target/dirigible/repository/root/registry/public/bike-park
 
